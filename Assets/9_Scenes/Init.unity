@@ -446,7 +446,7 @@ MonoBehaviour:
   PCR_StageList: {fileID: 11400000, guid: 0c5eb1e73168b4e49bc0c7f921926a4e, type: 2}
   DSG_StageList: {fileID: 11400000, guid: 735383ee6d0897d4eb0e652703757e34, type: 2}
   fadeDuration: 1
-  startStageKind: 2
+  startStageKind: 7
   currentStageKind: 1
   currentStageInstance: {fileID: 0}
 --- !u!4 &669508849

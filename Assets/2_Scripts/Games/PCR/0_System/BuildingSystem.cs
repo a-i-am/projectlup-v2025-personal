@@ -157,6 +157,8 @@ namespace LUP.PCR
             }
         }
 
+        // @TODO : 건물 편집 과정에서, 배치된 건물 이동이나 삭제도 가능하게 하기
+
         public Dictionary<int, BuildingBase> GetCurrentBuildingDictionary()
         {
             return currBuildings;

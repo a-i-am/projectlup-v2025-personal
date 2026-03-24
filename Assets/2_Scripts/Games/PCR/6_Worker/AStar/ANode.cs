@@ -9,11 +9,14 @@ namespace LUP.PCR
         public Vector3 worldPos;
         public int indexX;
         public int indexY;
+
         public int gCost;
         public int hCost;
         public ANode parentNode;
 
+        public int lastVisitedFrame;
         private int heapIndex;
+        
         public int HeapIndex
         {
             get { return heapIndex; }
@@ -36,6 +39,8 @@ namespace LUP.PCR
             worldPos = nWorldPos;
             indexX = nIndexX;
             indexY = nIndexY;
+
+            lastVisitedFrame = 0;
         }
 
         public int FCost

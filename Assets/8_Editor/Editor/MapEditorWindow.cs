@@ -141,7 +141,6 @@ namespace LUP.PCR
                 int wY = wall.gridPos.y;
                 float drawY = -wY * tileSize;
 
-
                 Vector3[] verts = new Vector3[]
                 {
                    new Vector3(wX * tileSize, drawY, 0),

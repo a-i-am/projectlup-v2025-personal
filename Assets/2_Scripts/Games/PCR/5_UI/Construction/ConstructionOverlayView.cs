@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System;
 
@@ -6,11 +6,11 @@ namespace LUP.PCR
 {
     public class ConstructionOverlayView : MonoBehaviour
     {
-        [Header("¾÷±×·¹ÀÌµå UI")]
-        [SerializeField] private Canvas contentRoot; // UI ÀüÃ¼ ºÎ¸ğ (UI È°¼º/ºñÈ°¼º)
+        [Header("ì—…ê·¸ë ˆì´ë“œ UI")]
+        [SerializeField] private Canvas contentRoot; // UI ì „ì²´ ë¶€ëª¨ (UI í™œì„±/ë¹„í™œì„±)
         [SerializeField] private Slider progressBar;
         [SerializeField] private Text timerText; // 00:00:00
-        [SerializeField] private Button btnAccelerate; // °¡¼Ó ¹öÆ°
+        [SerializeField] private Button btnAccelerate; // ê°€ì† ë²„íŠ¼
 
         public event Action OnClickAccelerate;
 
@@ -30,7 +30,7 @@ namespace LUP.PCR
             {
                 btnAccelerate.onClick.AddListener(() => OnClickAccelerate?.Invoke());
             }
-            Hide(); // ½ÃÀÛÇÒ ¶© ¼û±è
+            Hide(); // ì‹œì‘í•  ë• ìˆ¨ê¹€
         }
 
         private void LateUpdate()
@@ -41,7 +41,7 @@ namespace LUP.PCR
             }
         }
 
-        // State¿¡¼­ ¸Å ÇÁ·¹ÀÓ È£ÃâÇÒ °»½Å ÇÔ¼ö
+        // Stateì—ì„œ ë§¤ í”„ë ˆì„ í˜¸ì¶œí•  ê°±ì‹  í•¨ìˆ˜
         public void UpdateView(float progressRatio, float remainingTime)
         {
             if (progressBar != null)
@@ -49,7 +49,7 @@ namespace LUP.PCR
                 progressBar.value = progressRatio;
             }
 
-            // ½Ã:ºĞ:ÃÊ
+            // ì‹œ:ë¶„:ì´ˆ
             if (timerText != null)
             {
                 TimeSpan span = TimeSpan.FromSeconds(remainingTime);

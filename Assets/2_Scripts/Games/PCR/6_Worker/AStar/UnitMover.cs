@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
+using UnityEngine; 
 
 namespace LUP.PCR
 {
@@ -9,21 +8,25 @@ namespace LUP.PCR
     {
         [SerializeField] float rotateSpeed = 10f;
         [SerializeField] float moveSpeed = 5f;
+
         private CharacterController characterController;
         private AGridMap gridMap;
         private APathfinding pathfinder;
         private List<ANode> path;
+
         private int currentIndex;
+        public Vector3 CurrentDestination => currentDestination;
         private Vector3 currentDestination;
+
+        // 내부?
         private Vector3 currentInternalTarget;
         private Queue<Vector3> internalPathQueue = new Queue<Vector3>();
-        private bool isMovingInternally = false;
 
-        public Vector3 CurrentDestination => currentDestination;
         public bool IsMoving => (path != null && currentIndex < path.Count) || isMovingInternally;
-        private bool isClimbing = false;
+        private bool isMovingInternally = false;
         public bool IsClimbing => IsMoving && isClimbing;
-
+        private bool isClimbing = false;
+        
         void Start()
         {
             characterController = GetComponent<CharacterController>();
@@ -163,7 +166,8 @@ namespace LUP.PCR
             {
                 return;
             }
-            System.Collections.Generic.List<ANode> walkableNodes = new System.Collections.Generic.List<ANode>();
+
+            List<ANode> walkableNodes = new List<ANode>();
 
             foreach (ANode node in gridMap.grid)
             {
@@ -206,7 +210,8 @@ namespace LUP.PCR
             {
                 return gridMap.GetNodeFromWorldPosition(hit.point);
             }
-            // 공중에 떠 있거나 감지 실패시 기존 방식 사용
+
+            // 공중에 떠 있거나 감지 실패시
             return gridMap.GetNodeFromWorldPosition(transform.position);
         }
 

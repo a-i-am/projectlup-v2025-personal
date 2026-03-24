@@ -128,6 +128,11 @@ namespace LUP.PCR
             buildingSystem.CreateBuilding(currSelectedBuildingType, lastClickTile);
         }
 
+        //public void StoreBuilding()
+        //{
+        //    buildingSystem.StoreBuilding();
+        //}
+
         public void ReturnToIdleState()
         {
             IdleTask();
