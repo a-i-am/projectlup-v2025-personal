@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEngine;
 using UnityEditor;
-using UnityEngine.UIElements;
 using UnityEditorInternal;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace LUP.PCR
 {
@@ -14,11 +15,12 @@ namespace LUP.PCR
         private float tileSize = GridSize.tileSize;
         private bool isEditingMode = false;
 
-        [SerializeField] private int m_SelectedIndex = -1;
-        private VisualElement m_RightPane;
+        private BuildingInfo selectedBuilding = null;
+        private VisualElement RightPane;
         private Vector2 scrollPosition;
-        private string dataPath => Application.dataPath + "/Resources/Data/SavedData/production_runtime.json";
 
+
+        private string dataPath => Application.dataPath + "/Resources/Data/SavedData/production_runtime.json";
 
         [MenuItem("Tools/PCR Map Editor")]
         public static void ShowMapEditor()
@@ -49,14 +51,14 @@ namespace LUP.PCR
             Vector3 worldPos = ray.origin + ray.direction * distance;
             int gridX = Mathf.FloorToInt(worldPos.x / tileSize);
             int gridY = Mathf.FloorToInt(-worldPos.y / tileSize);
+            Vector2Int targetPos = new Vector2Int(gridX, gridY);
 
             if (e.type == EventType.MouseDown || e.type == EventType.MouseDrag)
             {
+                WallInfo existingWall = mapData.WallInfoList.FirstOrDefault(w => w.gridPos == targetPos);
+
                 if (e.button == 0)
                 {
-                    Vector2Int targetPos = new Vector2Int(gridX, gridY);
-                    WallInfo existingWall = mapData.WallInfoList.FirstOrDefault(w => w.gridPos == targetPos);
-
                     if (!e.shift && existingWall == null)
                     {
                         mapData.WallInfoList.Add(new WallInfo(1, targetPos));
@@ -68,11 +70,40 @@ namespace LUP.PCR
                         e.Use();
                     }
                 }
+            }
+
+            if (e.type == EventType.MouseDown)
+            {
+                BuildingInfo existingBuilding = mapData.BuildingInfoList.FirstOrDefault(b => b.gridPos == targetPos);
+
+                if (existingBuilding != null)
+                {
+                    // 선택
+                    selectedBuilding = existingBuilding;
+
+                }
+                else
+                {
+                    selectedBuilding = null;
+                }
 
             }
+
+            if (e.type == EventType.MouseMove)
+            {
+                if (selectedBuilding != null)
+                {
+                    // 이동
+                    selectedBuilding.gridPos = targetPos;
+                }
+
+                e.Use();
+            }
+
             DrawGridInScene();
             sceneView.Repaint();
         }
+
         private void CreateGUI()
         {
             VisualElement root = rootVisualElement;
