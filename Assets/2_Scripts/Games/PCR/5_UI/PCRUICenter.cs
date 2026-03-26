@@ -80,7 +80,6 @@ namespace LUP.PCR
 
             farmTaskUIVM.OnClickBack.Subscribe(_ =>
             {
-                Debug.Log("뒤로가기 신호 수신함!");
                 screen.Value = UIScreen.Main;
             }).AddTo(cd);
             farmTaskUIVM.OnClickUpgrade.Subscribe(_ =>

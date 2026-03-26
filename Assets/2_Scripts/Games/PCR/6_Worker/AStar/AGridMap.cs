@@ -63,10 +63,12 @@ namespace LUP.PCR
             return gridStartPoint + new Vector3(xPos, yPos, -2.5f);
         }
 
-        // Vector3(월드 좌표) -> ANode (내부에 x, y 인덱스 포함)
         public ANode GetNodeFromWorldPosition(Vector3 worldPosition)
         {
-            if (grid == null) { return null; }
+            if (grid == null) 
+            {
+                return null; 
+            }
 
             int x = Mathf.FloorToInt((worldPosition.x - gridStartPoint.x) / tileSize);
             int y = Mathf.FloorToInt(-(worldPosition.y - gridStartPoint.y) / tileSize);
@@ -79,7 +81,10 @@ namespace LUP.PCR
 
         public ANode GetNodeFromGridPos(Vector2Int pos)
         {
-            if (grid == null) { return null; }
+            if (grid == null) 
+            {
+                return null; 
+            }
 
             if (pos.x >= 0 && pos.y >= 0 && pos.x < grid.GetLength(0) && pos.y < grid.GetLength(1))
             {
@@ -89,10 +94,6 @@ namespace LUP.PCR
 
             return null;
         }
-        //public Vector3 GetNodeWorldPosition(ANode node)
-        //{
-        //    return node.worldPos;
-        //}
 
         public Vector3 GetNodeFootPosition(ANode node)
         {

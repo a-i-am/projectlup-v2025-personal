@@ -11,11 +11,13 @@ namespace LUP.PCR
     {
         private static readonly int[,] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
         AGridMap gridMap;
-
         Heap<ANode> openList;
         HashSet<ANode> closedSet;
         List<ANode> cachedPath;
         List<ANode> cachedNeighbors;
+
+        private int currentFrameCounter = 0;
+
         public APathfinding(AGridMap map)
         {
             gridMap = map;
@@ -29,23 +31,26 @@ namespace LUP.PCR
         {
             return 10 * (Mathf.Abs(a.indexX - b.indexX) + Mathf.Abs(a.indexY - b.indexY));
         }
-        void ResetNodes()
-        {
-            foreach (ANode node in gridMap.grid)
-            {
-                node.gCost = int.MaxValue;
-                node.hCost = 0;
-                node.parentNode = null;
-            }
-        }
 
         public List<ANode> FindPath(ANode startNode, ANode targetNode)
         {
-            ResetNodes();
-            startNode.gCost = 0;
+            currentFrameCounter++;
+
+            if (currentFrameCounter == int.MaxValue)
+            {
+                currentFrameCounter = 1;
+                foreach (ANode node in gridMap.grid)
+                {
+                    node.lastVisitedFrame = 0;
+                }
+            }
 
             openList.Clear();
             closedSet.Clear();
+
+            startNode.lastVisitedFrame = currentFrameCounter;
+            startNode.gCost = 0;
+            startNode.parentNode = null;
 
             openList.Add(startNode);
 
@@ -64,9 +69,19 @@ namespace LUP.PCR
                 foreach (ANode neighbor in cachedNeighbors)
                 {
                     if (closedSet.Contains(neighbor))
+                    {
                         continue;
+                    }
+
+                    if(neighbor.lastVisitedFrame != currentFrameCounter)
+                    {
+                        neighbor.gCost = int.MaxValue;
+                        neighbor.parentNode = null;
+                        neighbor.lastVisitedFrame = currentFrameCounter;
+                    }
 
                     int newCost = current.gCost + GetDistance(current, neighbor);
+
                     if (newCost < neighbor.gCost || !openList.Contains(neighbor))
                     {
                         neighbor.gCost = newCost;
@@ -143,14 +158,27 @@ namespace LUP.PCR
 
         LadderState GetLadderState(ANode node)
         {
-            if (!node.isLadder) return LadderState.None;
+            if (!node.isLadder)
+            {
+                return LadderState.None;
+            }
 
             bool up = HasLadderAt(node.indexX, node.indexY + 1);
             bool down = HasLadderAt(node.indexX, node.indexY - 1);
 
-            if (!up && !down) return LadderState.Single;
-            if (!up && down) return LadderState.Top;
-            if (up && !down) return LadderState.Bottom;
+            if (!up && !down)
+            {
+                return LadderState.Single;
+            }
+            if (!up && down)
+            {
+                return LadderState.Top;
+            }
+            if (up && !down)
+            {
+                return LadderState.Bottom;
+            }
+
             return LadderState.Middle;
         }
 
