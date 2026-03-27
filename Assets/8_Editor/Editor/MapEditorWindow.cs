@@ -16,9 +16,10 @@ namespace LUP.PCR
         private bool isEditingMode = false;
 
         private BuildingInfo selectedBuilding = null;
-        private VisualElement RightPane;
-        private Vector2 scrollPosition;
+        private BuildingType pendingBuildingType = BuildingType.NONE;
 
+        private Button buildingDeleteButton;
+        private Vector2 scrollPosition;
 
         private string dataPath => Application.dataPath + "/Resources/Data/SavedData/production_runtime.json";
 
@@ -45,6 +46,9 @@ namespace LUP.PCR
             {
                 return;
             }
+
+            HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
+
             Event e = Event.current;
             Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
             float distance = -ray.origin.z / ray.direction.z;
@@ -53,51 +57,73 @@ namespace LUP.PCR
             int gridY = Mathf.FloorToInt(-worldPos.y / tileSize);
             Vector2Int targetPos = new Vector2Int(gridX, gridY);
 
-            if (e.type == EventType.MouseDown || e.type == EventType.MouseDrag)
-            {
-                WallInfo existingWall = mapData.WallInfoList.FirstOrDefault(w => w.gridPos == targetPos);
+            BuildingInfo existingBuilding = GetBuildingAtPos(targetPos);
 
+            if (pendingBuildingType != BuildingType.NONE)
+            {
+                // ê±´ë¬¼ ë°°ì¹˜ ëª¨ë“œ: ì¢Œí´ë¦­ìœ¼ë¡œ ê±´ë¬¼ ë°°ì¹˜
+                if (e.type == EventType.MouseDown && e.button == 0 && existingBuilding == null)
+                {
+                    mapData.BuildingInfoList.Add(new BuildingInfo(mapData.GenerateId(), 1, targetPos, (int)pendingBuildingType, false));
+                    e.Use();
+                }
+            }
+            else
+            {
+                // ë²½ í¸ì§‘ ëª¨ë“œ
+                if (e.type == EventType.MouseDown || e.type == EventType.MouseDrag)
+                {
+                    WallInfo existingWall = mapData.WallInfoList.FirstOrDefault(w => w.gridPos == targetPos);
+
+                    if (e.button == 0 && existingBuilding == null)
+                    {
+                        if (!e.shift && existingWall == null)
+                        {
+                            mapData.WallInfoList.Add(new WallInfo(1, targetPos));
+                            e.Use(); // ì´ë²¤íŠ¸ë¥¼ ì†Œëª¨í•˜ì—¬ ì´í›„ ë‹¤ë¥¸ UIì— ì „ë‹¬í•˜ì§€ ì•Šê²Œ í•¨
+                        }
+                        else if (e.shift && existingWall != null)
+                        {
+                            mapData.WallInfoList.Remove(existingWall);
+                            e.Use();
+                        }
+                    }
+                }
+
+                // ê±´ë¬¼ ì„ íƒ/ì´ë™ ëª¨ë“œ
                 if (e.button == 0)
                 {
-                    if (!e.shift && existingWall == null)
+                    if (e.type == EventType.MouseDown)
                     {
-                        mapData.WallInfoList.Add(new WallInfo(1, targetPos));
-                        e.Use(); // ÀÌº¥Æ®¸¦ ¼Ò¸ğÇÏ¿© µÚ¿¡ ÀÖ´Â ´Ù¸¥ UI°¡ ´­¸®Áö ¾Ê°Ô ÇÔ
+                        if (selectedBuilding != null)
+                        {
+                            // ë‚´ë ¤ë†“ê¸°
+                            selectedBuilding = null;
+                            buildingDeleteButton.style.display = DisplayStyle.None;
+                        }
+                        else if (existingBuilding != null)
+                        {
+                            // ì„ íƒ
+                            selectedBuilding = existingBuilding;
+                            buildingDeleteButton.style.display = DisplayStyle.Flex;
+                        }
+                        else
+                        {
+                            buildingDeleteButton.style.display = DisplayStyle.None;
+                        }
                     }
-                    else if (e.shift && existingWall != null)
+
+                    if (e.type == EventType.MouseMove)
                     {
-                        mapData.WallInfoList.Remove(existingWall);
+                        if (selectedBuilding != null)
+                        {
+                            // ì´ë™
+                            selectedBuilding.gridPos = targetPos;
+                        }
+
                         e.Use();
                     }
                 }
-            }
-
-            if (e.type == EventType.MouseDown)
-            {
-                BuildingInfo existingBuilding = mapData.BuildingInfoList.FirstOrDefault(b => b.gridPos == targetPos);
-
-                if (existingBuilding != null)
-                {
-                    // ¼±ÅÃ
-                    selectedBuilding = existingBuilding;
-
-                }
-                else
-                {
-                    selectedBuilding = null;
-                }
-
-            }
-
-            if (e.type == EventType.MouseMove)
-            {
-                if (selectedBuilding != null)
-                {
-                    // ÀÌµ¿
-                    selectedBuilding.gridPos = targetPos;
-                }
-
-                e.Use();
             }
 
             DrawGridInScene();
@@ -114,15 +140,17 @@ namespace LUP.PCR
             title.style.marginBottom = 10;
             root.Add(title);
 
-            var editToggle = new UnityEngine.UIElements.Toggle("Scene Edit Mode");
+            Toggle editToggle = new UnityEngine.UIElements.Toggle("Scene Edit Mode");
             editToggle.value = isEditingMode;
-            editToggle.RegisterValueChangedCallback(evt => {
-                isEditingMode = evt.newValue;
-                SceneView.RepaintAll(); // ¸ğµå¸¦ ÄÓ ¶§ ¾À ºä Áï½Ã »õ·Î°íÄ§
-            });
+            editToggle.RegisterValueChangedCallback
+                (evt =>
+                {
+                    isEditingMode = evt.newValue;
+                    SceneView.RepaintAll(); // ì”¬ì„ ê»ë‹¤ ì¼°ì„ ë•Œ ê°•ì œ ë¦¬í”„ë ˆì‹œ
+                });
             root.Add(editToggle);
 
-            var loadButton = new UnityEngine.UIElements.Button(() =>
+            Button loadButton = new UnityEngine.UIElements.Button(() =>
             {
                 LoadDataFromJson();
             });
@@ -131,14 +159,45 @@ namespace LUP.PCR
             loadButton.style.marginTop = 5;
             root.Add(loadButton);
 
-            var saveButton = new UnityEngine.UIElements.Button(() => {
+            Button saveButton = new UnityEngine.UIElements.Button(() =>
+            {
                 SaveMapDataToJson();
             });
             saveButton.text = "Save to JSON";
             saveButton.style.height = 30;
             saveButton.style.marginTop = 10;
             root.Add(saveButton);
+
+            // ê±´ë¬¼ ë°°ì¹˜
+            Label placeLabel = new Label("ê±´ë¬¼ ë°°ì¹˜");
+            placeLabel.style.marginTop = 15;
+            placeLabel.style.unityFontStyleAndWeight = FontStyle.Bold;
+            root.Add(placeLabel);
+
+            EnumField buildingTypeField = new EnumField("ë°°ì¹˜í•  ê±´ë¬¼", BuildingType.NONE);
+            buildingTypeField.RegisterValueChangedCallback(evt =>
+            {
+                pendingBuildingType = (BuildingType)evt.newValue;
+                // ë°°ì¹˜ ëª¨ë“œ ì „í™˜ ì‹œ ì„ íƒ ì¤‘ì¸ ê±´ë¬¼ í•´ì œ
+                selectedBuilding = null;
+                buildingDeleteButton.style.display = DisplayStyle.None;
+            });
+            root.Add(buildingTypeField);
+
+            buildingDeleteButton = new Button(() =>
+            {
+                mapData.BuildingInfoList.Remove(selectedBuilding);
+                SaveMapDataToJson();
+                selectedBuilding = null;
+                buildingDeleteButton.style.display = DisplayStyle.None;
+            });
+            buildingDeleteButton.text = "ê±´ë¬¼ ì‚­ì œ";
+            buildingDeleteButton.style.height = 30;
+            buildingDeleteButton.style.marginTop = 5;
+            buildingDeleteButton.style.display = DisplayStyle.None;
+            root.Add(buildingDeleteButton);
         }
+
         private void LoadDataFromJson()
         {
             if (File.Exists(dataPath))
@@ -147,39 +206,73 @@ namespace LUP.PCR
                 mapData = JsonUtility.FromJson<ProductionRuntimeData>(jsonText);
                 SceneView.RepaintAll();
 
-                Debug.Log("<color=green>[Map Editor]</color> ¸Ê µ¥ÀÌÅÍ¸¦ ¼º°øÀûÀ¸·Î ºÒ·¯¿Ô½À´Ï´Ù!");
+                Debug.Log("<color=green>[Map Editor]</color> ë§µ ë°ì´í„°ë¥¼ ì„±ê³µì§ìœ¼ë¡œ ë¶ˆëŸ¬ì™”ìŠµë‹ˆë‹¤!");
             }
             else
             {
-                Debug.LogError("ÀúÀåµÈ JSON ÆÄÀÏÀÌ ¾ø½À´Ï´Ù: " + dataPath);
+                Debug.LogError("ì €ì¥ëœ JSON íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤: " + dataPath);
             }
         }
         private void SaveMapDataToJson()
         {
             string jsonText = JsonUtility.ToJson(mapData, true);
-            System.IO.File.WriteAllText(dataPath, jsonText);
-            //File.WriteAllText(dataPath, jsonText);
-            
-            Debug.Log("<color=cyan>[Map Editor]</color> ¸Ê µ¥ÀÌÅÍ°¡ ¼º°øÀûÀ¸·Î ÀúÀåµÇ¾ú½À´Ï´Ù!");
+            File.WriteAllText(dataPath, jsonText);
+
+            Debug.Log("<color=cyan>[Map Editor]</color> ë§µ ë°ì´í„°ê°€ ì„±ê³µì ìœ¼ë¡œ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤!");
         }
+
+        private BuildingInfo GetBuildingAtPos(Vector2Int pos)
+        {
+            foreach (BuildingInfo b in mapData.BuildingInfoList)
+            {
+                Vector2Int size = BuildingSizeTable.Get((BuildingType)b.buildingType);
+                if (pos.x >= b.gridPos.x && pos.x < b.gridPos.x + size.x &&
+                    pos.y >= b.gridPos.y && pos.y < b.gridPos.y + size.y)
+                {
+                    return b;
+                }
+            }
+            return null;
+        }
+
         private void DrawGridInScene()
         {
+            // ë²½: íŒŒë€ìƒ‰
             Handles.color = new Color(0.2f, 0.6f, 1f, 0.5f);
-
             foreach (WallInfo wall in mapData.WallInfoList)
             {
                 int wX = wall.gridPos.x;
-                int wY = wall.gridPos.y;
-                float drawY = -wY * tileSize;
+                float drawY = -wall.gridPos.y * tileSize;
 
                 Vector3[] verts = new Vector3[]
                 {
-                   new Vector3(wX * tileSize, drawY, 0),
-                   new Vector3((wX + 1) * tileSize, drawY, 0),
-                   new Vector3((wX + 1) * tileSize, drawY - tileSize, 0),
-                   new Vector3(wX * tileSize, drawY - tileSize, 0)
+                   new Vector3(wX * tileSize,           drawY,           0),
+                   new Vector3((wX + 1) * tileSize,     drawY,           0),
+                   new Vector3((wX + 1) * tileSize,     drawY - tileSize, 0),
+                   new Vector3(wX * tileSize,           drawY - tileSize, 0)
                 };
+                Handles.DrawAAConvexPolygon(verts);
+            }
 
+            // ê±´ë¬¼: ì´ˆë¡ìƒ‰ / ì„ íƒëœ ê±´ë¬¼: ë…¸ë€ìƒ‰
+            foreach (BuildingInfo building in mapData.BuildingInfoList)
+            {
+                bool isSelected = building == selectedBuilding;
+                Handles.color = isSelected
+                    ? new Color(1f, 0.9f, 0f, 0.6f)
+                    : new Color(0.2f, 0.9f, 0.3f, 0.5f);
+
+                Vector2Int size = BuildingSizeTable.Get((BuildingType)building.buildingType);
+                int bX = building.gridPos.x;
+                float drawY = -building.gridPos.y * tileSize;
+
+                Vector3[] verts = new Vector3[]
+                {
+                    new Vector3(bX * tileSize,                drawY,                    0),
+                    new Vector3((bX + size.x) * tileSize,     drawY,                    0),
+                    new Vector3((bX + size.x) * tileSize,     drawY - size.y * tileSize, 0),
+                    new Vector3(bX * tileSize,                drawY - size.y * tileSize, 0)
+                };
                 Handles.DrawAAConvexPolygon(verts);
             }
         }

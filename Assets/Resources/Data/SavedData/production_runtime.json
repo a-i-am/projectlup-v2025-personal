@@ -45,36 +45,6 @@
             "isConstructing": false
         },
         {
-            "buildingId": 8,
-            "level": 0,
-            "gridPos": {
-                "x": 11,
-                "y": 4
-            },
-            "buildingType": 14,
-            "isConstructing": true
-        },
-        {
-            "buildingId": 9,
-            "level": 0,
-            "gridPos": {
-                "x": 11,
-                "y": 5
-            },
-            "buildingType": 14,
-            "isConstructing": true
-        },
-        {
-            "buildingId": 10,
-            "level": 0,
-            "gridPos": {
-                "x": 11,
-                "y": 6
-            },
-            "buildingType": 14,
-            "isConstructing": true
-        },
-        {
             "buildingId": 11,
             "level": 18,
             "gridPos": {
@@ -128,8 +98,8 @@
         },
         {
             "buildingId": 12,
-            "elapsedTime": 4.391881942749023,
-            "currentStorage": 117
+            "elapsedTime": 9.765618324279786,
+            "currentStorage": 16
         },
         {
             "buildingId": 13,
@@ -181,7 +151,7 @@
         },
         {
             "buildingId": 11,
-            "elapsedTime": 2939.34228515625
+            "elapsedTime": 3774.93798828125
         },
         {
             "buildingId": 12,

@@ -56,40 +56,7 @@ namespace LUP.PCR
 
         public void TransitionRules(BuildingType type)
         {
-            switch (type)
-            {
-                case BuildingType.WHEATFARM:
-                    placementSize = new Vector2Int(4, 1);
-                    break;
-                case BuildingType.MUSHROOMFARM:
-                    placementSize = new Vector2Int(4, 1);
-                    break;
-                case BuildingType.MOLEFARM:
-                    placementSize = new Vector2Int(4, 1);
-                    break;
-                case BuildingType.RESTAURANT:
-                    placementSize = new Vector2Int(4, 1);
-                    break;
-                case BuildingType.POWERSTATION:
-                    placementSize = new Vector2Int(3, 1);
-                    break;
-                case BuildingType.STONEMINE:
-                    placementSize = new Vector2Int(2, 1);
-                    break;
-                case BuildingType.IRONMINE:
-                    placementSize = new Vector2Int(2, 1);
-                    break;
-                case BuildingType.COALMINE:
-                    placementSize = new Vector2Int(2, 1);
-                    break;
-                case BuildingType.LADDER:
-                    placementSize = new Vector2Int(1, 1);
-                    break;
-                case BuildingType.WORKSTATION:
-                    placementSize = new Vector2Int(4, 2);
-                    break;
-                   
-            }
+            placementSize = BuildingSizeTable.Get(type);
         }
     }
 
