@@ -2,7 +2,7 @@
     "filename": "production_runtime.json",
     "playerId": 0,
     "hasSavedGame": true,
-    "buildingId": 15,
+    "buildingId": 50,
     "buildingInfoList": [
         {
             "buildingId": 1,
@@ -46,7 +46,7 @@
         },
         {
             "buildingId": 11,
-            "level": 18,
+            "level": 19,
             "gridPos": {
                 "x": 11,
                 "y": 1
@@ -65,7 +65,17 @@
             "isConstructing": false
         },
         {
-            "buildingId": 13,
+            "buildingId": 14,
+            "level": 0,
+            "gridPos": {
+                "x": 8,
+                "y": 2
+            },
+            "buildingType": 2,
+            "isConstructing": true
+        },
+        {
+            "buildingId": 35,
             "level": 1,
             "gridPos": {
                 "x": 4,
@@ -75,14 +85,64 @@
             "isConstructing": false
         },
         {
-            "buildingId": 14,
-            "level": 0,
+            "buildingId": 36,
+            "level": 1,
             "gridPos": {
-                "x": 8,
-                "y": 2
+                "x": 11,
+                "y": 6
             },
-            "buildingType": 2,
-            "isConstructing": true
+            "buildingType": 14,
+            "isConstructing": false
+        },
+        {
+            "buildingId": 37,
+            "level": 1,
+            "gridPos": {
+                "x": 11,
+                "y": 5
+            },
+            "buildingType": 14,
+            "isConstructing": false
+        },
+        {
+            "buildingId": 38,
+            "level": 1,
+            "gridPos": {
+                "x": 11,
+                "y": 4
+            },
+            "buildingType": 14,
+            "isConstructing": false
+        },
+        {
+            "buildingId": 39,
+            "level": 1,
+            "gridPos": {
+                "x": 5,
+                "y": 4
+            },
+            "buildingType": 14,
+            "isConstructing": false
+        },
+        {
+            "buildingId": 40,
+            "level": 1,
+            "gridPos": {
+                "x": 6,
+                "y": 5
+            },
+            "buildingType": 14,
+            "isConstructing": false
+        },
+        {
+            "buildingId": 41,
+            "level": 1,
+            "gridPos": {
+                "x": 6,
+                "y": 6
+            },
+            "buildingType": 14,
+            "isConstructing": false
         }
     ],
     "productionInfoList": [
@@ -98,8 +158,8 @@
         },
         {
             "buildingId": 12,
-            "elapsedTime": 9.765618324279786,
-            "currentStorage": 16
+            "elapsedTime": 2.5637097358703615,
+            "currentStorage": 49
         },
         {
             "buildingId": 13,
@@ -151,7 +211,7 @@
         },
         {
             "buildingId": 11,
-            "elapsedTime": 3774.93798828125
+            "elapsedTime": 12.565013885498047
         },
         {
             "buildingId": 12,
@@ -173,13 +233,6 @@
         "isCooking": false
     },
     "wallInfoList": [
-        {
-            "wallType": 1,
-            "gridPos": {
-                "x": 0,
-                "y": 0
-            }
-        },
         {
             "wallType": 1,
             "gridPos": {
@@ -360,13 +413,6 @@
             "gridPos": {
                 "x": 20,
                 "y": 4
-            }
-        },
-        {
-            "wallType": 1,
-            "gridPos": {
-                "x": 12,
-                "y": 5
             }
         },
         {
@@ -890,29 +936,8 @@
         {
             "wallType": 1,
             "gridPos": {
-                "x": 15,
-                "y": 3
-            }
-        },
-        {
-            "wallType": 1,
-            "gridPos": {
-                "x": 16,
-                "y": 3
-            }
-        },
-        {
-            "wallType": 1,
-            "gridPos": {
                 "x": 17,
                 "y": 3
-            }
-        },
-        {
-            "wallType": 1,
-            "gridPos": {
-                "x": 7,
-                "y": 7
             }
         },
         {
@@ -962,6 +987,27 @@
             "gridPos": {
                 "x": 0,
                 "y": 6
+            }
+        },
+        {
+            "wallType": 1,
+            "gridPos": {
+                "x": 16,
+                "y": 3
+            }
+        },
+        {
+            "wallType": 1,
+            "gridPos": {
+                "x": 0,
+                "y": 0
+            }
+        },
+        {
+            "wallType": 1,
+            "gridPos": {
+                "x": 7,
+                "y": 7
             }
         }
     ],
