@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AssetBundleSample : MonoBehaviour
 {
-    public RoguelikeStaticDataLoader characterdata;
+    //public RoguelikeStaticDataLoader characterdata;
 
 
     void Start()

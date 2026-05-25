@@ -34,18 +34,18 @@ namespace LUP
             {
                 case LUP.Define.StageKind.RL:
                     filename = Define.RuntimeDataTypes.ToFilename(Define.RuntimeDataType.RoguelikeRuntime);
-                    data = JsonDataHelper.LoadData<RoguelikeRuntimeData>(filename);
+                    //data = JsonDataHelper.LoadData<RoguelikeRuntimeData>(filename);
                     break;
                 case LUP.Define.StageKind.DSG:
                     switch (stagetype)
                     {
                         case 1:
                             filename = Define.RuntimeDataTypes.ToFilename(Define.RuntimeDataType.DeckStrategyRuntime);
-                            data = JsonDataHelper.LoadData<DeckStrategyRuntimeData>(filename);
+                            //data = JsonDataHelper.LoadData<DeckStrategyRuntimeData>(filename);
                             break;
                         case 2:
                             filename = Define.RuntimeDataTypes.ToFilename(Define.RuntimeDataType.DSGEnemyRuntime);
-                            data = JsonDataHelper.LoadData<DSGEnemyStageRuntimeData>(filename);
+                            //data = JsonDataHelper.LoadData<DSGEnemyStageRuntimeData>(filename);
                             break;
                     }
                     break;
@@ -68,11 +68,11 @@ namespace LUP
                     break;
                 case LUP.Define.StageKind.ES:
                     filename = Define.RuntimeDataTypes.ToFilename(Define.RuntimeDataType.ExtractionShooterRuntime);
-                    data = JsonDataHelper.LoadData<ExtractionRuntimeData>(filename);
+                    //data = JsonDataHelper.LoadData<ExtractionRuntimeData>(filename);
                     break;
                 case LUP.Define.StageKind.ST:
                     filename = Define.RuntimeDataTypes.ToFilename(Define.RuntimeDataType.ShootingRuntime);
-                    data = JsonDataHelper.LoadData<ShootingRuntimeData>(filename);
+                    //data = JsonDataHelper.LoadData<ShootingRuntimeData>(filename);
                     break;
                 default:
                     Debug.LogError($"No runtime data defined for StageKind: { stagekind}");
