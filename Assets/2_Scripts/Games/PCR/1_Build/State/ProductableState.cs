@@ -4,10 +4,10 @@ namespace LUP.PCR
 {
     public class ProductableState : IBuildState
     {
-        public float totalTime;         // 시간당 생산률
-        public float progressRatio;     // 진행률 (누적 진행 시간 / 총 건설 시간)
-        public bool isCompledted;       // 완료 여부
-        public bool isStarted;          // 생산 시작 여부
+        public float totalTime;
+        public float progressRatio;
+        public bool isCompledted;
+        public bool isStarted;
 
         private ProductableBuilding productableBuilding;
         private ProductionInfo currentProductionInfo;

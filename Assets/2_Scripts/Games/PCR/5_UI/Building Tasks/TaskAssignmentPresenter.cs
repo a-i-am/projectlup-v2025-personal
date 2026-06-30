@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,8 +11,8 @@ namespace LUP.PCR
         [SerializeField] private WorkerSystem workerSystem;
 
         [Header("Data Source")]
-        // @TODO : BuildingSystem 에서 가져와야 함
-        
+
+
         [SerializeField] private GameObject buildingGroup;
         [SerializeField] private List<ProductableBuilding> allBuildings;
 
@@ -32,14 +32,14 @@ namespace LUP.PCR
                 buildingGroup.GetComponentsInChildren<ProductableBuilding>(true, allBuildings);
             }
         }
-        //private void OnEnable()
-        //{
-        //    view.OnBuildingClick += HandleProductionRequest;
-        //}
-        //private void OnDisable()
-        //{
-        //    view.OnBuildingClick -= HandleProductionRequest;
-        //}
+
+
+
+
+
+
+
+
 
 
         private void Start()
@@ -53,21 +53,21 @@ namespace LUP.PCR
         }
 
 
-        // @TODO : 실제 생산 시스템과 연동
-        //private void HandleProductionRequest(ProductableBuilding building)
-        //{
-        //    WorkerAI worker = dataCenter.GetBestWorker(building.entrancePos);
 
-        //    if(worker != null)
-        //    {
-        //        worker.AssignTask(currentSelectedBuilding);
-        //        Debug.Log($"[AutoAssign] {worker.name} -> {building.name} (가장 오래 쉼: {Time.time - worker.LastWorkEndTime:F1}초)");
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning($"[AutoAssign] {building.name}에 보낼 작업자가 없습니다!");
-        //    }
-        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void HandleBuildingSelected(ProductableBuilding building)
         {
@@ -93,7 +93,7 @@ namespace LUP.PCR
         {
             if (currentSelectedBuilding == null) return;
 
-            // AssignTask 내부에서 HasTask = true가 되면서 상태 변경됨
+
             worker.AssignTask(currentSelectedBuilding);
 
             view.UpdateStatusText($"할당 완료!\n{worker.name} -> {currentSelectedBuilding}");

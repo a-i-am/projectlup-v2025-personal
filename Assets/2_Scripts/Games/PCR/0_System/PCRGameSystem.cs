@@ -42,28 +42,28 @@ namespace LUP.PCR
         {
             resourceCenter = new PCRResourceCenter();
 
-            // TileMap Init
+
             tileMap.InitTileMap();
 
-            // ResourceCenterInit
+
             resourceCenter.InitResource();
 
-            // BuildingSystem Init
+
             buildingSystem.InitBuildingSystem(buildingGenerator, buildPreview, digWallPreview, tileMap, resourceCenter);
 
-            // WorkerSystem Init
+
             workerSystem.InitWorkerSystem(buildingSystem, tileMap);
 
-            // DigWallPreview Init
+
             digWallPreview.UpdateAllDigWallPreview(tileMap);
 
-            // BuildPreview Init
+
             buildPreview.Init(tileMap);
 
-            // TaskController Init
+
             taskController.InitTaskController(digWallPreview, buildPreview, tileMap, buildingSystem);
 
-            // uiCenter Init
+
             uiCenter.InitUI(taskController, resourceCenter);
         }
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using static System.Collections.Specialized.BitVector32;
 
@@ -11,7 +11,7 @@ namespace LUP.PCR
         [Header("State")]
         [SerializeField] private float hunger = 0;
         private bool isHunger = false;
-        private bool hasTask = false; 
+        private bool hasTask = false;
         public bool IsWorking { get; set; }
 
         [Header("Component")]
@@ -74,16 +74,16 @@ namespace LUP.PCR
         {
             this.myInfo = info;
 
-            // 이름 설정 (디버깅용)
+
             gameObject.name = info.name;
 
-            // 컴포넌트 및 블랙보드 초기화
+
             InitBTReferences();
 
-            // 글로벌 건물 정보 세팅 (기존 SetGlobalBuildings 역할)
+
             LocalBlackboard.SetValue(BBKeys.Restaurant, restaurant);
-            LocalBlackboard.SetValue(BBKeys.WorkerStation, station); // 혹은 workStationList
-            
+            LocalBlackboard.SetValue(BBKeys.WorkerStation, station);
+
             Debug.Log($"Worker Initialized: {info.name} (ID: {info.id})");
 
         }
@@ -106,12 +106,12 @@ namespace LUP.PCR
         }
         private void InitBlackboard()
         {
-            //정적 데이터(참조) 등록
+
             LocalBlackboard.SetValue(BBKeys.OwnerAI, this);
             LocalBlackboard.SetValue(BBKeys.Self, worker);
             LocalBlackboard.SetValue(BBKeys.UnitMover, mover);
 
-            // BT 상태 초기화
+
             LocalBlackboard.SetValue(BBKeys.Hunger, hunger);
             LocalBlackboard.SetValue(BBKeys.IsHunger, IsHunger);
             LocalBlackboard.SetValue(BBKeys.HasTask, hasTask);
@@ -166,7 +166,7 @@ namespace LUP.PCR
 
             if(!isHunger)
             {
-                // 배고프게 만들기
+
                 Hunger = Mathf.Clamp(hunger + Time.deltaTime * 0.1f, 0, 3);
             }
         }
@@ -175,10 +175,10 @@ namespace LUP.PCR
         {
             hasTask = true;
             IsWorking = false;
-            
+
             currentTaskPlace = workingPlace;
             LocalBlackboard.SetValue(BBKeys.AssignedWorkplace, currentTaskPlace);
-            
+
             hasTask = true;
             LocalBlackboard.SetValue(BBKeys.HasTask, hasTask);
         }

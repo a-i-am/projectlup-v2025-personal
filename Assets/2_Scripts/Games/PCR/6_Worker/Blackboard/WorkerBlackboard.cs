@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LUP.PCR
 {
     public class WorkerBlackboard : MonoBehaviour
     {
-        private Dictionary<WorkerBlackboardKey, object> data = new (); // 실제 데이터 저장소
-        private Dictionary<string, WorkerBlackboardKey> keyRegistry = new (); // 키 캐싱 ( 같은 문자열인 키 생성 방지 )
+        private Dictionary<WorkerBlackboardKey, object> data = new ();
+        private Dictionary<string, WorkerBlackboardKey> keyRegistry = new ();
 
-        // 키가 이미 존재하면 기존 키 반환, 없으면 새로 생성하여 등록 후 반환
+
         public WorkerBlackboardKey GetOrRegisterKey(string keyName)
         {
-            if (keyRegistry.TryGetValue(keyName, out WorkerBlackboardKey existingKey)) 
+            if (keyRegistry.TryGetValue(keyName, out WorkerBlackboardKey existingKey))
             {
-                return existingKey; 
+                return existingKey;
             }
 
             WorkerBlackboardKey newKey = new WorkerBlackboardKey(keyName);
@@ -42,7 +42,7 @@ namespace LUP.PCR
         {
             if (data.TryGetValue(key, out object val))
             {
-                // 타입 캐스팅 (저장된게 int인데 float로 달라고 하면 에러나거나 기본값)
+
                 if (val is T castedVal) return castedVal;
             }
             return default(T);
@@ -60,7 +60,7 @@ namespace LUP.PCR
                 value = GetValue<T>(key);
                 return true;
             }
-            
+
             value = default;
             return false;
         }

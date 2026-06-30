@@ -1,4 +1,4 @@
-﻿using LUP;
+using LUP;
 using UnityEngine;
 
 public class StageLoadButton : MonoBehaviour

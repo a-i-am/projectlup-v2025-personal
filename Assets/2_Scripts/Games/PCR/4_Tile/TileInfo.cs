@@ -10,7 +10,7 @@ namespace LUP.PCR
         public BuildingType buildingType;
         public WallType wallType;
         public int id;
-        //public Vector2Int gridPos { get; set; } // 필요한가?
+
 
         public TileInfo(TileType tileType, BuildingType buildingType, WallType wallType, Vector2Int pos, int id)
         {

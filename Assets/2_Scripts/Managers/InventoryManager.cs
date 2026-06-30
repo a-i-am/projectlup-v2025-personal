@@ -78,7 +78,7 @@ namespace LUP
                 if (inventory != null)
                 {
                     inventory.filename = filename;
-                    inventory.InitializeFromJson();  // Dictionary 복원
+                    inventory.InitializeFromJson();
                     Debug.Log($"[InventoryManager] '{inventoryKey}' 인벤토리 로드 완료 (파일: {filename})");
                 }
                 else
@@ -90,13 +90,13 @@ namespace LUP
             }
             else
             {
-                // 새 인벤토리 생성
+
                 inventory = new Inventory();
                 inventory.filename = filename;
                 Debug.Log($"[InventoryManager] '{inventoryKey}' 새 인벤토리 생성 (파일: {filename})");
             }
 
-            // 자동 등록
+
             RegisterInventory(inventoryKey, inventory);
             return inventory;
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +25,7 @@ namespace LUP
 
         protected abstract void LoadResources();
 
-        // 자식 클래스에서 각 게임에 걸맞는 변수에 데이터 삽입
+
         protected abstract void GetDatas();
 
         protected abstract void SaveDatas();

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LUP.PCR
-{ 
+{
     public class IsNewTaskChecker : WorkerBlackboardNode
     {
         public IsNewTaskChecker(WorkerBlackboard bb) : base(bb) { }

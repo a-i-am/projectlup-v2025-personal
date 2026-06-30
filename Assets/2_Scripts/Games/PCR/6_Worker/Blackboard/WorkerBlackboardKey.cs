@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +23,7 @@ namespace LUP.PCR
                 return hash;
             }
         }
-        // 해시(숫자)값 비교 로직
+
         public bool Equals(WorkerBlackboardKey other) => hashKey == other.hashKey;
         public override bool Equals(object obj) => obj is WorkerBlackboardKey other && Equals(other);
         public override int GetHashCode() => hashKey;

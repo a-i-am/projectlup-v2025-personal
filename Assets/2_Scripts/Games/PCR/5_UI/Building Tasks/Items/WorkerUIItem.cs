@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using TMPro; //@TODO : TMP 폰트로 변경
+
 using System;
 
 namespace LUP.PCR
@@ -18,7 +18,7 @@ namespace LUP.PCR
             {
                 nameText.text = worker.name;
             }
-        
+
             if (statusIconImage != null)
             {
                 if (icon != null)

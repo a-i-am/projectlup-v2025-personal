@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
@@ -88,7 +88,7 @@ namespace LUP.PCR
             instancingView.Add(scrollView);
 
             occlusionView = new VisualElement();
-            occlusionView.style.display = DisplayStyle.None; // 처음엔 숨김
+            occlusionView.style.display = DisplayStyle.None;
 
             Label occDesc = new Label("오클루전 컬링: 카메라에 보이지 않는 타일을 렌더링에서 제외");
             occDesc.style.whiteSpace = WhiteSpace.Normal;
@@ -105,7 +105,7 @@ namespace LUP.PCR
             Button bakeBtn = new Button(BakeOcclusionCulling);
             bakeBtn.text = "오클루전 컬링 Bake";
             bakeBtn.style.height = 40;
-            bakeBtn.style.backgroundColor = new Color(0.2f, 0.6f, 0.2f); // 초록색 강조
+            bakeBtn.style.backgroundColor = new Color(0.2f, 0.6f, 0.2f);
             occlusionView.Add(bakeBtn);
 
             Button clearBtn = new Button(ClearOcclusionCulling);
@@ -135,7 +135,7 @@ namespace LUP.PCR
 
             foreach (var renderer in renderers)
             {
-                // Occluder (가리는 물체)와 Occludee (가려지는 물체) 속성을 모두 부여
+
                 StaticEditorFlags flags = GameObjectUtility.GetStaticEditorFlags(renderer.gameObject);
                 flags |= StaticEditorFlags.OccluderStatic;
                 flags |= StaticEditorFlags.OccludeeStatic;

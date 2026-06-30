@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 namespace LUP.PCR
@@ -54,7 +54,7 @@ namespace LUP.PCR
 
         }
 
-        // Vector2Int(데이터좌표) -> Vector3(월드 좌표) 변환 
+
         public Vector3 GridToWorldPosition(Vector2Int gridPos)
         {
             float xPos = gridPos.x * tileSize + tileSize / 2f;
@@ -65,9 +65,9 @@ namespace LUP.PCR
 
         public ANode GetNodeFromWorldPosition(Vector3 worldPosition)
         {
-            if (grid == null) 
+            if (grid == null)
             {
-                return null; 
+                return null;
             }
 
             int x = Mathf.FloorToInt((worldPosition.x - gridStartPoint.x) / tileSize);
@@ -81,9 +81,9 @@ namespace LUP.PCR
 
         public ANode GetNodeFromGridPos(Vector2Int pos)
         {
-            if (grid == null) 
+            if (grid == null)
             {
-                return null; 
+                return null;
             }
 
             if (pos.x >= 0 && pos.y >= 0 && pos.x < grid.GetLength(0) && pos.y < grid.GetLength(1))
@@ -112,17 +112,17 @@ namespace LUP.PCR
             {
                 if (!node.isWalkable)
                 {
-                    // 벽
+
                     Gizmos.color = new Color(1f, 0f, 0f, 0.4f);
                 }
                 else if (node.isLadder)
                 {
-                    // 사다리
+
                     Gizmos.color = new Color(0f, 0f, 1f, 0.4f);
                 }
                 else
                 {
-                    // 일반 바닥
+
                     Gizmos.color = new Color(1f, 1f, 1f, 0.1f);
                 }
 
@@ -132,7 +132,7 @@ namespace LUP.PCR
                 );
             }
 
-            // A* 경로
+
             if (pathToDraw != null && pathToDraw.Count > 0)
             {
                 Gizmos.color = Color.green;
@@ -145,14 +145,14 @@ namespace LUP.PCR
                 }
             }
 
-            // 시작 노드
+
             if (debugStartNode != null)
             {
                 Gizmos.color = new Color(0f, 0.5f, 1f, 0.6f);
                 Gizmos.DrawSphere(debugStartNode.worldPos, tileSize * 0.4f);
             }
 
-            // 목표 노드
+
             if (debugTargetNode != null)
             {
                 Gizmos.color = new Color(1f, 0f, 0f, 0.6f);
@@ -185,7 +185,7 @@ namespace LUP.PCR
                         result += $"[{x}, {y}] ";
                         count++;
 
-                        // 보기 좋게 10개씩 줄바꿈
+
                         if (count % 10 == 0) result += "\n";
                     }
                 }

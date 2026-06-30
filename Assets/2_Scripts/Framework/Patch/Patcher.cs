@@ -23,26 +23,26 @@ namespace LUP
                 Debug.LogWarning("[Patcher] 이미 Patcher 인스턴스가 존재합니다. 중복 오브젝트를 파괴합니다.");
                 Destroy(gameObject);
             }
-            
+
         }
 
         [Header("CDN Settings")]
-        // 서버 URL
+
         [SerializeField] private string url = "https://project-lup.github.io/projectlup-v2025-cdn/";
         [SerializeField]
-        private VersionsData versionsdata;      // 로컬에 있는 버전 데이터
+        private VersionsData versionsdata;
         [SerializeField]
-        private VersionsData tempversionsdata;  // CDN 에서 받아온 버전 데이터
+        private VersionsData tempversionsdata;
         [SerializeField]
         private List<Define.AssetBundleKind> differentlist = new List<Define.AssetBundleKind>();
         private AssetBundleManifest AB_Manifest;
 
         [Header("Download Progress")]
-        private float currentDownloadProgress = 0f;  // 현재 파일 다운로드 진행률 (0~1)
-        private int currentFileIndex = 0;            // 현재 다운로드 중인 파일 인덱스
-        private int totalFileCount = 0;              // 전체 다운로드할 파일 수
+        private float currentDownloadProgress = 0f;
+        private int currentFileIndex = 0;
+        private int totalFileCount = 0;
 
-        // 외부에서 읽을 수 있는 전체 진행률 (0~1)
+
         public float TotalProgress
         {
             get
@@ -54,7 +54,7 @@ namespace LUP
 
         void Start()
         {
-            StartCoroutine(PatchFlow());                         
+            StartCoroutine(PatchFlow());
         }
 
         void Update()
@@ -104,12 +104,12 @@ namespace LUP
 
             using (UnityWebRequest request = UnityWebRequest.Get(fullurl))
             {
-                // yield return request.SendWebRequest();
 
-                // 비동기로 요청 시작
+
+
                 var operation = request.SendWebRequest();
 
-                // 다운로드 진행률 업데이트
+
                 while (!operation.isDone)
                 {
                     currentDownloadProgress = request.downloadProgress;
@@ -138,7 +138,7 @@ namespace LUP
                 Debug.Log($"[Patcher] 에셋번들 다운로드 완료: {fullurl} → {filePath}");
             }
 
-            // 현재 파일 다운로드 완료
+
             currentDownloadProgress = 1f;
             yield return null;
         }
@@ -152,7 +152,7 @@ namespace LUP
                 yield break;
             }
 
-            // 전체 파일 수 설정
+
             totalFileCount = differentlist.Count;
             currentFileIndex = 0;
 
@@ -225,7 +225,7 @@ namespace LUP
                 }
 
                 string json = www.downloadHandler.text;
-                // Debug.Log($"[Patcher] CDN Versions.json 수신:\n{json}");
+
 
                 VersionsData data = null;
                 try
@@ -245,14 +245,14 @@ namespace LUP
                 }
 
                 tempversionsdata = data;
-                //Debug.Log("[Patcher] tempversionsdata 세팅 완료");
+
             }
         }
 
         private IEnumerator CompareVersions()
         {
             differentlist.Clear();
-            // 지금 가진거(versionsdata)랑 서버(tempversionsdata)에 있는 버전 체크
+
             if (versionsdata.Videohash != tempversionsdata.Videohash)
             {
                 differentlist.Add(Define.AssetBundleKind.Video);
@@ -289,20 +289,20 @@ namespace LUP
         }
         private IEnumerator PatchFlow()
         {
-            // 1. 로컬 버전 데이터 로드
+
             yield return LoadVersions();
 
-            // 2. CDN에서 버전 데이터 받아오기
+
             yield return LoadTempVersionsFromCDN();
 
-            // 둘 중 하나라도 없으면 그냥 종료
+
             if (versionsdata == null || tempversionsdata == null)
             {
                 Debug.Log("[Patcher] 버전 데이터가 세팅되지 않아 패치를 중단합니다.");
                 yield break;
             }
 
-            // 3. 버전 비교
+
             yield return CompareVersions();
 
             if (differentlist.Count==0)
@@ -311,10 +311,10 @@ namespace LUP
                 yield break;
             }
 
-            // 4. 리소스 다운로드
+
             yield return DownloadResources();
 
-            // 5. 버젼 저장
+
             yield return SaveVersions();
             ResourceManager.Instance.UnLoadAssetBundles();
             ResourceManager.Instance.LoadAssetBundles();
@@ -332,13 +332,13 @@ namespace LUP
         {
             if(ResourceManager.Instance.GetAssetBundleSize() > (int)Define.AssetBundleKind.__MAX)
             {
-                //애셋번들들 쭉 확인해야함. for문이랑 enum+딕셔너리 사용예정
+
             }
         }
 
         private IEnumerator CheckVersions()
         {
-            
+
             if (!HasLocalManifest())
             {
                 versionsdata.Videohash = "";
@@ -369,7 +369,7 @@ namespace LUP
 
                 versionsdata.Datahash = AB_Manifest.GetAssetBundleHash("data").ToString();
             }
-            
+
 
             versionsdata.SaveData();
 

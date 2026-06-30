@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using TMPro; //@TODO : TMP 폰트로 변경
+
 using System;
 
 namespace LUP.PCR
@@ -15,7 +15,7 @@ namespace LUP.PCR
         {
             if (nameText != null)
             {
-                nameText.text = building.buildingName.Value; // //@TODO : building.buildingName으로 가져오기
+                nameText.text = building.buildingName.Value;
             }
 
             btn.onClick.RemoveAllListeners();

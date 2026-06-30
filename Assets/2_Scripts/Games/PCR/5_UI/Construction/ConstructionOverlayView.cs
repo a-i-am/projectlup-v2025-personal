@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System;
 
@@ -7,10 +7,10 @@ namespace LUP.PCR
     public class ConstructionOverlayView : MonoBehaviour
     {
         [Header("업그레이드 UI")]
-        [SerializeField] private Canvas contentRoot; // UI 전체 부모 (UI 활성/비활성)
+        [SerializeField] private Canvas contentRoot;
         [SerializeField] private Slider progressBar;
-        [SerializeField] private Text timerText; // 00:00:00
-        [SerializeField] private Button btnAccelerate; // 가속 버튼
+        [SerializeField] private Text timerText;
+        [SerializeField] private Button btnAccelerate;
 
         public event Action OnClickAccelerate;
 
@@ -30,7 +30,7 @@ namespace LUP.PCR
             {
                 btnAccelerate.onClick.AddListener(() => OnClickAccelerate?.Invoke());
             }
-            Hide(); // 시작할 땐 숨김
+            Hide();
         }
 
         private void LateUpdate()
@@ -41,7 +41,7 @@ namespace LUP.PCR
             }
         }
 
-        // State에서 매 프레임 호출할 갱신 함수
+
         public void UpdateView(float progressRatio, float remainingTime)
         {
             if (progressBar != null)
@@ -49,7 +49,7 @@ namespace LUP.PCR
                 progressBar.value = progressRatio;
             }
 
-            // 시:분:초
+
             if (timerText != null)
             {
                 TimeSpan span = TimeSpan.FromSeconds(remainingTime);

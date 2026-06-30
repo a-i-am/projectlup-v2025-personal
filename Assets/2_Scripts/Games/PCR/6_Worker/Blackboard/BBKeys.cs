@@ -1,4 +1,4 @@
-﻿
+
 namespace LUP.PCR
 {
     public static class BBKeys

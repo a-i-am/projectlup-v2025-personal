@@ -1,4 +1,4 @@
-﻿[System.Serializable]
+[System.Serializable]
 public class PCRConstructionStaticData
 {
     [Column("BuildingType")] public int buildingType;

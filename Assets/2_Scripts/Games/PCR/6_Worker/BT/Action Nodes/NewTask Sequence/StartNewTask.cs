@@ -1,18 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LUP.PCR
 {
     public class StartNewTask : WorkerBlackboardNode
     {
         public StartNewTask(WorkerBlackboard bb) : base(bb) { }
-        
+
         protected override NodeState OnUpdate()
         {
             if (OwnerAI.IsWorking)
             {
                 return NodeState.SUCCESS;
             }
-            
+
             ProductableBuilding building = GetData<ProductableBuilding>(BBKeys.AssignedWorkplace);
 
             if (building == null)

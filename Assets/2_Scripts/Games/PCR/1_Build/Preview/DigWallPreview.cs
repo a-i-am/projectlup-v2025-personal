@@ -18,7 +18,7 @@ namespace LUP.PCR
         {
             foreach (Tile tile in tileMap.tiles)
             {
-                //TODO: 내용 변경
+
                 if (tile.tileInfo.tileType == TileType.WALL)
                 {
                     AddCanDigTile(tile);

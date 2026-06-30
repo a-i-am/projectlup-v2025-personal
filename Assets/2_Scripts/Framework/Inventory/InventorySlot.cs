@@ -4,12 +4,12 @@ namespace LUP
 {
     public interface IItemable
     {
-        int ItemID { get; }                      // ���� ID (�ʼ�)
-        string ItemName { get; }                    // ǥ�ÿ� �̸�
-        LUP.Define.ItemType Type { get; }           // ������ Ÿ��
-        int MaxStackSize { get; }                   // �ִ� ���� (1 = ���� �Ұ�)
-        Sprite Icon { get; }                        // UI ������
-        string Description { get; }                 // 아이템 설명
+        int ItemID { get; }
+        string ItemName { get; }
+        LUP.Define.ItemType Type { get; }
+        int MaxStackSize { get; }
+        Sprite Icon { get; }
+        string Description { get; }
 
         bool IsUsable { get; }
 

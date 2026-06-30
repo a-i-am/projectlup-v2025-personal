@@ -6,7 +6,7 @@ namespace LUP.PCR
     {
         public float cookTime;
         public float progressRatio;
-        public bool isCompledted;     
+        public bool isCompledted;
         public bool isStarted;
 
         private BuildingRestaurant restaurant;
@@ -72,7 +72,7 @@ namespace LUP.PCR
         public void Reset()
         {
             restaurantInfo.elapsedTime = 0f;
-            //cookTime = ;
+
             progressRatio = 0f;
             isCompledted = false;
             isStarted = false;

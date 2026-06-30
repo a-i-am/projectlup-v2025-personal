@@ -21,10 +21,10 @@ namespace LUP.PCR
                 return;
             }
 
-            // 2. 입력
+
             if (Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame)
             {
-                // 클릭시 UI가 포함이면 리턴한다.
+
                 if (EventSystem.current.IsPointerOverGameObject()) return;
 
                 var pos = Mouse.current.position.ReadValue();
@@ -54,10 +54,10 @@ namespace LUP.PCR
                         taskController.ReturnToIdleState();
                     }
                 }
-                //else
-                //{
-                //    taskController.ReturnToIdleState();
-                //}
+
+
+
+
             }
         }
 

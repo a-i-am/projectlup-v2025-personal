@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,10 +37,10 @@ namespace LUP
         private BaseStage currentStageInstance= null;
         private bool isTransitioning = false;
 
-        // Transition 검증용 2차원 리스트
+
         private List<List<Define.StageKind>> transitionTable = new List<List<Define.StageKind>>();
 
-        // StageKind → Scene 이름 매핑
+
         private Dictionary<Define.StageKind, SceneList> sceneNameMap = new Dictionary<Define.StageKind, SceneList>();
 
         public override void Awake()
@@ -53,7 +53,7 @@ namespace LUP
             if (currentStageInstance == null)
             {
                 LoadStage(startStageKind);
-            }    
+            }
         }
 
         private void InitializeFadeCanvas()
@@ -67,33 +67,33 @@ namespace LUP
 
                     Canvas canvas = fadeObj.AddComponent<Canvas>();
                     canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-                    canvas.sortingOrder = 999; // 최상단에 렌더링
+                    canvas.sortingOrder = 999;
 
-                    // CanvasScaler 추가
+
                     UnityEngine.UI.CanvasScaler scaler = fadeObj.AddComponent<UnityEngine.UI.CanvasScaler>();
                     scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
                     scaler.referenceResolution = new Vector2(1920, 1080);
 
-                    // GraphicRaycaster 추가
+
                     fadeObj.AddComponent<UnityEngine.UI.GraphicRaycaster>();
                     fadeCanvas = fadeObj.AddComponent<CanvasGroup>();
 
                     GameObject fadeImage = new GameObject("FadeImage");
-                    fadeImage.layer = LayerMask.NameToLayer("UI"); // UI Layer 설정
+                    fadeImage.layer = LayerMask.NameToLayer("UI");
                     fadeImage.transform.SetParent(fadeObj.transform, false);
 
                     UnityEngine.UI.Image image = fadeImage.AddComponent<UnityEngine.UI.Image>();
                     image.color = Color.black;
-                    image.raycastTarget = false; // Raycast 불필요
+                    image.raycastTarget = false;
 
-                    // RectTransform 설정 (전체 화면)
+
                     RectTransform rectTransform = fadeImage.GetComponent<RectTransform>();
                     rectTransform.anchorMin = Vector2.zero;
                     rectTransform.anchorMax = Vector2.one;
                     rectTransform.sizeDelta = Vector2.zero;
                     rectTransform.anchoredPosition = Vector2.zero;
 
-                    // DontDestroyOnLoad 설정
+
                     DontDestroyOnLoad(fadeObj);
 
                     Debug.Log("FadeCanvas created and set to DontDestroyOnLoad");
@@ -105,7 +105,7 @@ namespace LUP
                 }
             }
 
-            // 초기 상태: 투명하게 설정 (게임 시작 시 검은 화면이 보이지 않도록)
+
             if (fadeCanvas)
             {
                 fadeCanvas.alpha = 0f;
@@ -113,12 +113,12 @@ namespace LUP
             }
         }
 
-        // Transition 테이블 초기화
+
         private void InitializeTransitionTable()
         {
             List<Define.StageKind> Transition = new List<Define.StageKind>();
 
-            // Unknown
+
             SetTransition(Transition, Define.StageKind.Unknown);
             SetTransition(Transition, Define.StageKind.Debug);
             SetTransition(Transition, Define.StageKind.Intro);
@@ -133,7 +133,7 @@ namespace LUP
             Transition.Clear();
 
 
-            // Debug
+
             SetTransition(Transition, Define.StageKind.Debug);
             SetTransition(Transition, Define.StageKind.Intro);
             SetTransition(Transition, Define.StageKind.Main);
@@ -146,7 +146,7 @@ namespace LUP
             AddTransitionToList(Transition);
             Transition.Clear();
 
-            // Main
+
             SetTransition(Transition, Define.StageKind.Main);
             SetTransition(Transition, Define.StageKind.RL);
             SetTransition(Transition, Define.StageKind.ST);
@@ -157,14 +157,14 @@ namespace LUP
             AddTransitionToList(Transition);
             Transition.Clear();
 
-            // Intro
+
             SetTransition(Transition, Define.StageKind.Main);
             SetTransition(Transition, Define.StageKind.Intro);
 
             AddTransitionToList(Transition);
             Transition.Clear();
 
-            //Roguelike
+
             SetTransition(Transition, Define.StageKind.RL);
             SetTransition(Transition, Define.StageKind.Main);
             SetTransition(Transition, Define.StageKind.Intro);
@@ -173,7 +173,7 @@ namespace LUP
             AddTransitionToList(Transition);
             Transition.Clear();
 
-            // Shooting
+
             SetTransition(Transition, Define.StageKind.ST);
             SetTransition(Transition, Define.StageKind.Main);
             SetTransition(Transition, Define.StageKind.Intro);
@@ -182,7 +182,7 @@ namespace LUP
             AddTransitionToList(Transition);
             Transition.Clear();
 
-            // ExtractionShooter
+
             SetTransition(Transition, Define.StageKind.ES);
             SetTransition(Transition, Define.StageKind.Main);
             SetTransition(Transition, Define.StageKind.Intro);
@@ -191,7 +191,7 @@ namespace LUP
             AddTransitionToList(Transition);
             Transition.Clear();
 
-            // Production
+
             SetTransition(Transition, Define.StageKind.Main);
             SetTransition(Transition, Define.StageKind.Intro);
             SetTransition(Transition, Define.StageKind.PCR);
@@ -204,7 +204,7 @@ namespace LUP
             AddTransitionToList(Transition);
             Transition.Clear();
 
-            // DeckStrategy
+
             SetTransition(Transition, Define.StageKind.Main);
             SetTransition(Transition, Define.StageKind.Intro);
             SetTransition(Transition, Define.StageKind.PCR);
@@ -213,7 +213,7 @@ namespace LUP
             AddTransitionToList(Transition);
             Transition.Clear();
 
-            // Tutorial
+
             SetTransition(Transition, Define.StageKind.Debug);
             SetTransition(Transition, Define.StageKind.Intro);
             SetTransition(Transition, Define.StageKind.Main);
@@ -238,7 +238,7 @@ namespace LUP
             transitionTable.Add(list);
         }
 
-        // Stage 전환 
+
         public void LoadStage(Define.StageKind targetStageKind, int sceneindex = -1)
         {
             if (isTransitioning)
@@ -247,29 +247,29 @@ namespace LUP
                 return;
             }
 
-            // 1. Transition 검증
+
             if (!IsValidTransition(currentStageKind, targetStageKind))
             {
                 Debug.LogError($"Invalid transition: {currentStageKind} → {targetStageKind}");
                 return;
             }
 
-            // 2. 전환 시작
+
             StartCoroutine(TransitionCoroutine(targetStageKind, sceneindex));
         }
 
-        // Transition 검사
+
         private bool IsValidTransition(Define.StageKind from, Define.StageKind to)
         {
             return transitionTable[(int)from].Contains(to);
         }
 
-        /// Stage 전환 Coroutine
+
         private IEnumerator TransitionCoroutine(Define.StageKind targetStageKind, int sceneindex= -1)
         {
             isTransitioning = true;
 
-            // Stage Exit 처리
+
             yield return StartCoroutine(OnStageExit());
 
             string sceneName;
@@ -284,10 +284,10 @@ namespace LUP
                 sceneName = sceneNameMap[targetStageKind].sceneNames[sceneindex];
             }
             Debug.Log("SceneName:" + sceneName);
-            // 4. Scene 로드
-            
 
-            // 씬매니저에 씬이 존재하는지 확인 - 빌드 세팅
+
+
+
             if (SceneManager.GetSceneByName(sceneName).IsValid() == false &&
                 SceneUtility.GetBuildIndexByScenePath(sceneName) == -1)
             {
@@ -307,7 +307,7 @@ namespace LUP
 
             while (!asyncLoad.isDone)
             {
-                // 로딩 진행도 표시 가능
+
                 float progress = asyncLoad.progress;
                 yield return new WaitForSeconds(0.1f);
             }
@@ -321,7 +321,7 @@ namespace LUP
             }
             Debug.Log(currentStageInstance);
             yield return StartCoroutine(OnStageEnter());
-            
+
             currentStageKind = targetStageKind;
             isTransitioning = false;
 

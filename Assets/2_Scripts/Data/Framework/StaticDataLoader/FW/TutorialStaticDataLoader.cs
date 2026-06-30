@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "TutorialStaticData", menuName = "Scriptable Objects/TutorialStaticData")]
 public class TutorialStaticDataLoader : BaseStaticDataLoader<TutorialStaticData>

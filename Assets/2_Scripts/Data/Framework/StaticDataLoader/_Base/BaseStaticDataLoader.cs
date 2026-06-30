@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -38,7 +38,7 @@ public abstract class BaseStaticDataLoader<T> : BaseStaticDataLoader where T : n
 
         Debug.Log($"[{GetType().Name}] Loading data from {sourceType} source: {url}");
 
-        // 어댑터 데이터 로드
+
         string rawData = null;
         string error = null;
 
@@ -46,14 +46,14 @@ public abstract class BaseStaticDataLoader<T> : BaseStaticDataLoader where T : n
             data => rawData = data,
             err => error = err);
 
-        // 에러 체크
+
         if (!string.IsNullOrEmpty(error))
         {
             Debug.LogError($"[{GetType().Name}] Failed to load data: {error}");
             yield break;
         }
 
-        // rawData null 체크
+
         if (string.IsNullOrEmpty(rawData))
         {
             Debug.LogError($"[{GetType().Name}] Loaded data is null or empty. URL: {url}");
@@ -62,7 +62,7 @@ public abstract class BaseStaticDataLoader<T> : BaseStaticDataLoader where T : n
 
         Debug.Log($"[{GetType().Name}] Data loaded successfully. Size: {rawData.Length} chars");
 
-        // 어댑터 파싱
+
         DataList = adapter.ParseToObjects<T>(rawData, START_ROW);
         Debug.Log($"[{GetType().Name}] Successfully loaded {DataList.Count} entries from {sourceType}");
     }
@@ -141,18 +141,18 @@ public class BaseStaticDataReaderEditor : Editor
 
             if (current == null)
             {
-                // null인 경우 yield return null과 같음
+
                 await System.Threading.Tasks.Task.Delay(10);
             }
             else if (current is IEnumerator nestedCoroutine)
             {
-                // 중첩된 코루틴 재귀 처리
+
                 Debug.Log("[BaseStaticData] Processing nested coroutine...");
                 await ProcessCoroutine(nestedCoroutine);
             }
             else if (current is UnityEngine.Networking.UnityWebRequestAsyncOperation asyncOp)
             {
-                // UnityWebRequest 대기
+
                 Debug.Log("[BaseStaticData] Waiting for web request...");
                 while (!asyncOp.isDone)
                 {
@@ -162,7 +162,7 @@ public class BaseStaticDataReaderEditor : Editor
             }
             else
             {
-                // 기타 yield 처리
+
                 await System.Threading.Tasks.Task.Delay(10);
             }
         }

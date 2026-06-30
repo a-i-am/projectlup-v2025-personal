@@ -9,7 +9,7 @@ namespace LUP.PCR
     [InitializeOnLoad]
     public static class MapEditorOverlay
     {
-        // ── 데이터 ──────────────────────────────────────────────────────────────
+
         private static ProductionRuntimeData mapData = new ProductionRuntimeData();
         private static readonly float tileSize = GridSize.tileSize;
 
@@ -29,7 +29,7 @@ namespace LUP.PCR
         private static string DataPath =>
             Application.dataPath + "/Resources/Data/SavedData/production_runtime.json";
 
-        // ── 프리팹 경로 테이블 ────────────────────────────────────────────────────
+
         private static readonly Dictionary<BuildingType, string> prefabPaths =
             new Dictionary<BuildingType, string>
         {
@@ -53,8 +53,8 @@ namespace LUP.PCR
         private static Texture2D  wallPreviewCache = null;
         private static bool       wallPrefabLoaded = false;
 
-        // ── 씬 프리뷰 오브젝트 ───────────────────────────────────────────────────
-        // 실제 프리팹을 HideAndDontSave로 인스턴스화 → 게임 뷰와 동일하게 렌더링
+
+
         private const string PreviewPrefix = "[MapEditorPreview]";
 
         private static readonly Dictionary<int, GameObject>       buildingPreviewMap = new Dictionary<int, GameObject>();
@@ -62,7 +62,7 @@ namespace LUP.PCR
 
         private static bool previewDirty = true;
 
-        // ── 팔레트 ──────────────────────────────────────────────────────────────
+
         private static readonly BuildingType[] paletteItems =
         {
             BuildingType.NONE,
@@ -81,20 +81,20 @@ namespace LUP.PCR
         private static Vector2 paletteScrollPos = Vector2.zero;
 
         private const float PaletteX     = 10f;
-        private const float PaletteStartY = 265f;  // 패널·힌트 아래 고정 시작 위치
+        private const float PaletteStartY = 265f;
         private const float PaletteW     = 200f;
         private const float PaletteItemH = 34f;
         private const float PaletteItemPad = 3f;
-        private const float PaletteThumbS  = 26f;  // 벽 썸네일 크기
+        private const float PaletteThumbS  = 26f;
 
-        // ── 초기화 ───────────────────────────────────────────────────────────────
+
         static MapEditorOverlay()
         {
             SceneView.duringSceneGui += OnSceneGUI;
             AssemblyReloadEvents.beforeAssemblyReload += ClearAllPreviews;
             EditorApplication.quitting                += ClearAllPreviews;
 
-            // 이전 세션 고아 오브젝트 정리
+
             CleanOrphanedPreviews();
 
             if (IsActive)
@@ -123,7 +123,7 @@ namespace LUP.PCR
             SceneView.RepaintAll();
         }
 
-        // ── 씬 GUI ───────────────────────────────────────────────────────────────
+
         private static void OnSceneGUI(SceneView sceneView)
         {
             if (!IsActive) return;
@@ -140,7 +140,7 @@ namespace LUP.PCR
 
                 HandleSceneInput();
 
-                // HandleSceneInput에서 gridPos가 갱신된 후 프리뷰 동기화
+
                 if (!previewDirty && selectedBuilding != null)
                     SyncSelectedBuildingPreview();
             }
@@ -161,7 +161,7 @@ namespace LUP.PCR
             sceneView.Repaint();
         }
 
-        // ── 단축키 ───────────────────────────────────────────────────────────────
+
         private static void HandleKeyboardShortcuts()
         {
             Event e = Event.current;
@@ -210,22 +210,22 @@ namespace LUP.PCR
             }
         }
 
-        // UI 패널 위에 마우스가 있는지 확인 (GUI 좌표계)
+
         private static bool IsMouseOverUI()
         {
             Vector2 mp = Event.current.mousePosition;
 
-            // 메인 패널
+
             if (isPanelVisible && new Rect(10, 10, 260, 162).Contains(mp))
                 return true;
 
-            // 단축키 힌트 패널
+
             const float lineH = 16f;
             float hintH = 2 * lineH + 8f;
             if (new Rect(10, 210, 200, hintH).Contains(mp))
                 return true;
 
-            // 건물 팔레트
+
             float totalContentH = paletteItems.Length * (PaletteItemH + PaletteItemPad) + PaletteItemPad;
             float availH        = Screen.height - PaletteStartY - 20f;
             float paletteH      = Mathf.Min(totalContentH, availH);
@@ -235,7 +235,7 @@ namespace LUP.PCR
             return false;
         }
 
-        // ── 씬 뷰 입력 처리 ──────────────────────────────────────────────────────
+
         private static void HandleSceneInput()
         {
             HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
@@ -245,7 +245,7 @@ namespace LUP.PCR
             Event e = Event.current;
             BuildingInfo existingBuilding = GetBuildingAtPos(hoveredGridPos);
 
-            // 건물 이동
+
             if (e.button == 0 && e.type == EventType.MouseMove)
             {
                 if (selectedBuilding != null)
@@ -260,7 +260,7 @@ namespace LUP.PCR
                     Vector2Int size = BuildingSizeTable.Get((BuildingType)selectedBuilding.buildingType);
                     if (IsAreaFreeForBuilding(selectedBuilding.gridPos, size, selectedBuilding))
                     {
-                        // 확정: 프리뷰 위치를 이미 SyncSelectedBuildingPreview가 맞춰줬으므로 그대로
+
                         selectedBuilding = null;
                     }
                 }
@@ -282,7 +282,7 @@ namespace LUP.PCR
                 }
             }
 
-            // 벽 추가
+
             if (pendingBuildingType == BuildingType.NONE && selectedBuilding == null)
             {
                 if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 0)
@@ -313,7 +313,7 @@ namespace LUP.PCR
             );
         }
 
-        // ── 프리뷰 오브젝트 관리 ─────────────────────────────────────────────────
+
         private static void RebuildPreviewObjects()
         {
             ClearAllPreviews();
@@ -352,14 +352,14 @@ namespace LUP.PCR
             go.name      = PreviewPrefix + prefab.name;
             go.hideFlags = HideFlags.HideAndDontSave;
 
-            // 게임 로직 스크립트 비활성화 (렌더링만 유지)
+
             foreach (MonoBehaviour mono in go.GetComponentsInChildren<MonoBehaviour>(true))
                 mono.enabled = false;
 
             return go;
         }
 
-        // 드래그 중 선택된 건물 프리뷰 위치 실시간 갱신
+
         private static void SyncSelectedBuildingPreview()
         {
             if (selectedBuilding == null) return;
@@ -402,7 +402,7 @@ namespace LUP.PCR
             wallPreviewMap.Clear();
         }
 
-        // 도메인 리로드 후 남은 고아 오브젝트 정리
+
         private static void CleanOrphanedPreviews()
         {
             foreach (GameObject go in Resources.FindObjectsOfTypeAll<GameObject>())
@@ -412,7 +412,7 @@ namespace LUP.PCR
             }
         }
 
-        // ── 씬 뷰 오버레이 패널 ──────────────────────────────────────────────────
+
         private static void DrawOverlayPanel()
         {
             if (!isPanelVisible) return;
@@ -454,7 +454,7 @@ namespace LUP.PCR
             GUILayout.EndArea();
         }
 
-        // ── 단축키 전용 플로팅 힌트 ──────────────────────────────────────────────
+
         private static void DrawShortcutHints()
         {
             if (!isEditingMode) return;
@@ -482,7 +482,7 @@ namespace LUP.PCR
             GUILayout.EndArea();
         }
 
-        // ── 씬 뷰 좌측 세로 건물 팔레트 ────────────────────────────────────────
+
         private static void DrawBuildingPalette()
         {
             float viewH         = Screen.height;
@@ -508,7 +508,7 @@ namespace LUP.PCR
 
                 if (type == BuildingType.NONE)
                 {
-                    // 벽: 썸네일 + 이름
+
                     Texture2D thumb = GetPreviewTexture(BuildingType.NONE);
                     float     labelX = PaletteItemPad * 2;
                     if (thumb != null)
@@ -526,7 +526,7 @@ namespace LUP.PCR
                 }
                 else
                 {
-                    // 건물: 이름만 표시
+
                     GUIStyle ns = new GUIStyle(EditorStyles.miniLabel) { alignment = TextAnchor.MiddleLeft };
                     ns.normal.textColor = isSelected ? new Color(1f, 0.95f, 0.4f) : new Color(0.9f, 0.9f, 0.9f);
                     GUI.Label(new Rect(PaletteItemPad * 2, curY, PaletteW - PaletteItemPad * 3, PaletteItemH),
@@ -545,7 +545,7 @@ namespace LUP.PCR
             GUI.EndScrollView();
         }
 
-        // ── 팔레트용 AssetPreview 캐시 ───────────────────────────────────────────
+
         private static Texture2D GetPreviewTexture(BuildingType type)
         {
             if (type == BuildingType.NONE)
@@ -594,7 +594,7 @@ namespace LUP.PCR
             return wallPrefabCache;
         }
 
-        // ── 데이터 I/O ──────────────────────────────────────────────────────────
+
         private static void LoadDataFromJson()
         {
             if (File.Exists(DataPath))
@@ -618,7 +618,7 @@ namespace LUP.PCR
             Debug.Log("<color=cyan>[Map Editor]</color> 맵 데이터가 성공적으로 저장되었습니다!");
         }
 
-        // ── 그리드 헬퍼 ─────────────────────────────────────────────────────────
+
         private static BuildingInfo GetBuildingAtPos(Vector2Int pos)
         {
             foreach (BuildingInfo b in mapData.BuildingInfoList)
@@ -655,12 +655,12 @@ namespace LUP.PCR
             return true;
         }
 
-        // ── 씬 색상 큐브 (편집 기준선) ────────────────────────────────────────────
+
         private static void DrawGridInScene()
         {
             BuildingInfo hoveredBuilding = GetBuildingAtPos(hoveredGridPos);
 
-            // 벽: 파란색 / 호버: 밝은 파란색
+
             foreach (WallInfo wall in mapData.WallInfoList)
             {
                 bool isHovered = isEditingMode && wall.gridPos == hoveredGridPos;
@@ -679,7 +679,7 @@ namespace LUP.PCR
                 });
             }
 
-            // 건물: 초록색 / 호버: 청록색 / 선택: 노란색 or 셀별 빨간색
+
             foreach (BuildingInfo building in mapData.BuildingInfoList)
             {
                 bool       isSelected = building == selectedBuilding;

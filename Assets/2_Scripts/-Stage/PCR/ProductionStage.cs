@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace LUP.PCR
         private float saveTime;
         private float savefreq;
 
-        // 변수명은 예시이니 바꾸셔도 됩니다.
+
         public Inventory PCRInven;
 
         protected override void Awake()
@@ -50,11 +50,11 @@ namespace LUP.PCR
         {
             yield return base.OnStageEnter();
 
-            // InventoryManager를 통해 PCR 인벤토리 로드 및 등록
+
             PCRInven = InventoryManager.Instance.LoadOrCreateInventory("PCR", "PCRInventory.json");
 
             LoadFirstGameData();
-        
+
             gameSystem.InitPCRGameSystem();
 
             yield return null;
@@ -62,20 +62,20 @@ namespace LUP.PCR
         public override IEnumerator OnStageStay()
         {
             yield return base.OnStageStay();
-            //일단 납두기
+
             yield return null;
         }
         public override IEnumerator OnStageExit()
         {
             yield return base.OnStageExit();
-            //구현부
+
 
 
             yield return null;
         }
         protected override void LoadResources()
         {
-            //resource = ResourceManager.Instance.Load...
+
         }
 
         protected override void GetDatas()
@@ -83,7 +83,7 @@ namespace LUP.PCR
             List<BaseStaticDataLoader> loaders = base.GetStaticData(this, 1);
             List<BaseRuntimeData> runtimeDatas = base.GetRuntimeData(this, 1);
 
-            // static
+
             if (loaders != null && loaders.Count > 0)
             {
                 foreach (var loader in loaders)
@@ -111,7 +111,7 @@ namespace LUP.PCR
                 }
             }
 
-            // runtime
+
             if (runtimeDatas != null && runtimeDatas.Count > 0)
             {
                 foreach (var runtimeData in runtimeDatas)
@@ -151,7 +151,7 @@ namespace LUP.PCR
             }
 
 
-            // 인벤토리 초기 데이터
+
             PCRInven.Clear();
 
             for(int i = 1; i<= 10; i++)
@@ -161,7 +161,7 @@ namespace LUP.PCR
                 PCRInven.AddItem(item, 10);
             }
 
-            // 건물 초기 데이터
+
             {
                 Debug.LogWarning("[PCRStage] BuildingInfoList First Load");
 
@@ -179,7 +179,7 @@ namespace LUP.PCR
                 runtimeData.BuildingInfoList = newBuildingDataList;
             }
 
-            // 벽 초기 데이터
+
             {
                 Debug.LogWarning("[PCRStage] WallInfoList First Load");
 

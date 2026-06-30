@@ -34,8 +34,8 @@ namespace LUP.PCR
         {
             cd.Clear();
 
-            //backBtn.onClick.RemoveAllListeners();
-            //backBtn.onClick.AddListener(() => vm.ClickBack.OnNext(Unit.Default));
+
+
 
             wheatFarmBtn?.onClick.RemoveAllListeners();
             wheatFarmBtn?.onClick.AddListener(() => vm.OnBuildingSelected.OnNext(BuildingType.WHEATFARM));

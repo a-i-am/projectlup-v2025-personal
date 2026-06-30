@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -17,14 +17,14 @@ namespace LUP
             videoplayer.clip = clip;
             videoplayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
 
-            // 첫 번째 오디오 트랙을 활성화 (보통 0번이 기본 트랙)
+
             videoplayer.EnableAudioTrack(0, true);
             videoplayer.SetDirectAudioMute(0, false);
 
-            // AudioSource 연결
+
             videoplayer.SetTargetAudioSource(0, audioSource);
 
-            // 초기 볼륨 적용
+
             audioSource.volume = videoVolume.value;
         }
         void Awake()
@@ -39,13 +39,13 @@ namespace LUP
 
         private void Update()
         {
-            
+
         }
 
         public override IEnumerator OnStageEnter()
         {
             yield return base.OnStageEnter();
-            
+
 
             SetVideoClip(clip);
             videoplayer.Play();
@@ -63,12 +63,12 @@ namespace LUP
         protected override void LoadResources()
         {
             clip = ResourceManager.Instance.LoadVideoClip<VideoClip>("SampleVideo2");
-            //resource = ResourceManager.Instance.Load...
+
         }
 
         protected override void GetDatas()
         {
-            //data = DataManager.Instance.GetData...
+
         }
 
         protected override void SaveDatas()

@@ -8,7 +8,7 @@ namespace LUP.PCR
 {
     public abstract class ProductableBuilding : BuildingBase
     {
-        // 읽기전용 데이터
+
         public PCRProductionStaticData currentProductionData;
 
         protected ProductionInfo productionInfo;

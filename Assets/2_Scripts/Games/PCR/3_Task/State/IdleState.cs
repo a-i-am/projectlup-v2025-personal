@@ -22,10 +22,10 @@ namespace LUP.PCR
                 return;
             }
 
-            // 입력
+
             if (Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame)
             {
-                // 클릭시 UI가 포함이면 리턴한다.
+
                 if (EventSystem.current.IsPointerOverGameObject()) return;
 
                 if (bIsActiveUI)
@@ -40,7 +40,7 @@ namespace LUP.PCR
                     RaycastHit wallHit;
                     RaycastHit tileHit;
 
-                    // 클릭 타일 갱신
+
                     if (Physics.Raycast(ray, out tileHit, 1000f, LayerMask.GetMask("Tile")))
                     {
                         Tile tile = tileHit.collider.GetComponent<Tile>();

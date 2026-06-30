@@ -19,13 +19,13 @@ namespace LUP.PCR
         protected override void Start()
         {
 
-            //buildingEvents.OnBuildingSelected += OpenBuildingUI;
+
             buildingEvents.OnBuildingDeselected += CloseBuildingUI;
         }
 
         private void Update()
         {
-            // 추후에 가속 아이템 적용 가능하게 만들어야 한다.
+
             float deltaTime = Time.deltaTime;
             currBuildState?.Tick(deltaTime);
         }
@@ -75,7 +75,7 @@ namespace LUP.PCR
             CompletedState comState = currBuildState as CompletedState;
             if (comState != null)
             {
-                // 만들 음식이랑 개수 조정 필요
+
                 ChangeState(cookingState);
             }
 

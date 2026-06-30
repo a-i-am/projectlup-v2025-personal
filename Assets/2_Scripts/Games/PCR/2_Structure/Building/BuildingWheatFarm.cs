@@ -14,7 +14,7 @@ namespace LUP.PCR
         protected override void Start()
         {
             base.Start();
-            //buildingEvents.OnBuildingSelected += OpenBuildingUI;
+
             buildingEvents.OnBuildingDeselected += CloseBuildingUI;
         }
 
@@ -22,22 +22,22 @@ namespace LUP.PCR
         {
             float deltaTime = Time.deltaTime;
 
-            // 공사 중(업그레이드 중)
-            // 작업자 유무(hasWork)와 상관없이 무조건 시간을 흐르게 함
+
+
             if (buildingInfo.isConstructing)
             {
                 currBuildState?.Tick(deltaTime);
-                return; // 여기서 끝냄
+                return;
             }
 
-            // 생산 중
-            // 작업자가 있을 때만(!hasWork 체크) 시간을 흐르게 함
+
+
             if (!hasWork)
             {
                 return;
             }
-            
-            // 추후에 가속 아이템 적용 가능하게 만들어야 한다.
+
+
             currBuildState?.Tick(deltaTime);
         }
 
@@ -45,7 +45,7 @@ namespace LUP.PCR
         {
             this.runtimeData = runtimeData;
 
-            // Production
+
             productionInfo = runtimeData.GetProductionInfo(buildingInfo.buildingId);
             if (productionInfo == null)
             {
@@ -54,7 +54,7 @@ namespace LUP.PCR
                 productionInfo = newProductionInfo;
             }
 
-            // Constructing Building
+
             constructionInfo = runtimeData.GetConstructionInfo(buildingInfo.buildingId);
             if (constructionInfo == null)
             {
@@ -72,7 +72,7 @@ namespace LUP.PCR
             level.Value = buildingInfo.level;
             isConstructing.Value = buildingInfo.isConstructing;
 
-            // 작업자 있는지 데이터 필요.
+
             hasWork = false;
             buildingName.Value = "WheatFarm";
             placeName = buildingName.Value;
@@ -83,7 +83,7 @@ namespace LUP.PCR
             currentProductionData = stage.GetCurrentProductionData((int)BuildingType.WHEATFARM, buildingInfo.level);
             maxStorage.Value = currentProductionData.StorageCapacity;
             productionPerHour.Value = currentProductionData.productionPerHour;
-            
+
             if (buildingInfo.isConstructing)
             {
                 ChangeState(constructState);
@@ -98,7 +98,7 @@ namespace LUP.PCR
 
         public override void CompleteContruction()
         {
-            // 레벨업
+
             buildingInfo.level++;
             level.Value = buildingInfo.level;
 
@@ -156,7 +156,7 @@ namespace LUP.PCR
             {
                 DeliverToInventory();
                 StartProduction();
-                //StopProduction();
+
             }
             else
             {
@@ -170,8 +170,8 @@ namespace LUP.PCR
             productionInfo.currentStorage = 0;
             currentStorage.Value = productionInfo.currentStorage;
         }
-       
-    
+
+
     }
 
 }

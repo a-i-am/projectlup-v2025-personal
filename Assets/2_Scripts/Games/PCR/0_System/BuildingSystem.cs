@@ -132,7 +132,7 @@ namespace LUP.PCR
 
             if (building != null)
             {
-                // @TODO: Id 설정 만들어야 한다.
+
 
                 building.resourceCenter = resourceCenter;
 
@@ -157,7 +157,7 @@ namespace LUP.PCR
             }
         }
 
-        // @TODO : 건물 편집 과정에서, 배치된 건물 이동이나 삭제도 가능하게 하기
+
 
         public Dictionary<int, BuildingBase> GetCurrentBuildingDictionary()
         {

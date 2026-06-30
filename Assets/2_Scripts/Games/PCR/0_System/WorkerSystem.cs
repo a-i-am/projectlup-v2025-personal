@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LUP.PCR
@@ -6,29 +6,29 @@ namespace LUP.PCR
     public class WorkerSystem : MonoBehaviour
     {
         public static WorkerSystem Instance { get; private set; }
-        
+
         [Header("Worker Settings")]
         [SerializeField] private GameObject workerLogicPrefab;
         [SerializeField] private List<GameObject> workerModelPrefabs = new List<GameObject>();
         [SerializeField] private Transform workerContainer;
 
-        private BuildingBase defaultRestaurant; 
-        private BuildingBase defaultStation; // @TODO : 같은 종류의 목적지 중에 가장 가까운 곳을 찾게 bt 로직 변경
+        private BuildingBase defaultRestaurant;
+        private BuildingBase defaultStation;
         private int maxWorkerCount = 50;
         private bool isInitialized = false;
 
         private TileMap tileMap;
         private AGridMap aGrid;
 
-        //// 런타임에서 갱신되는 데이터들
+
         private ProductionRuntimeData pcrRuntimeData;
         private List<int> curReservedBuildingIdList;
         private List<int> curAssignedBuildingIdList;
-        // 모든 건물정보와 작업자 정보
-        private Dictionary<int, BuildingBase> curBuildings; // 건물 Id로 BuildingBase 읽기전용
+
+        private Dictionary<int, BuildingBase> curBuildings;
         private List<WorkerInfo> curWorkerInfoList;
 
-        // 실제 작업 할당
+
         private List<BuildingBase> taskBuildingList = new List<BuildingBase>();
         private List<WorkerAI> activeWorkers;
         private Queue<StructureBase> taskQueue = new Queue<StructureBase>(GridSize.x * GridSize.y);
@@ -58,20 +58,20 @@ namespace LUP.PCR
 
             curWorkerInfoList = pcrRuntimeData.WorkerInfoList;
 
-            // 위 데이터 기반으로 초기화.
+
             curWorkerInfoList.Clear();
             activeWorkers = new List<WorkerAI>(maxWorkerCount);
 
             InitDefaults();
-            // @TODO: 초기 건물 외에 다른 건물들(앞으로 새로 배치될 때 포함해서) 세워질 때마다 호출되게 수정하기
-            AddWorkPlaces(); 
-            
+
+            AddWorkPlaces();
+
             TestDebuging();
             isInitialized = true;
         }
         private void InitDefaults()
         {
-            // 초기 건물정보 생성
+
             if (curBuildings.TryGetValue(1, out BuildingBase b1) && b1 is BuildingRestaurant)
             {
                 defaultRestaurant = b1;
@@ -105,11 +105,11 @@ namespace LUP.PCR
                 }
             }
 
-            // @TODO: 식당과 워크스테이션도 작업장소로 포함시킬지 고민하기
-            //if (defaultRestaurant != null) taskBuildingList.Add(defaultRestaurant);
-            //if (defaultStation != null) taskBuildingList.Add(defaultStation);
 
-            // 초기 작업자 정보 생성
+
+
+
+
             int defaultWorkerCount = 5;
             if (curWorkerInfoList.Count == 0)
             {
@@ -133,7 +133,7 @@ namespace LUP.PCR
                 taskBuildingList.Add(building);
             }
 
-            //@TODO : 건물 외 작업 구역(채집 등)도 별도의 task~List.Add 로 별도의 목록에 추가
+
         }
 
         private void IgnoreCollisionWithOtherWorkers(CharacterController newWorkerCC)
@@ -157,7 +157,7 @@ namespace LUP.PCR
             }
 
             ANode spawnNode = aGrid.GetNodeFromGridPos(defaultStation.entrancePos);
-            
+
             if (spawnNode != null)
             {
                 Vector3 floorPos = aGrid.GetNodeFootPosition(spawnNode);
@@ -199,24 +199,24 @@ namespace LUP.PCR
 
         private void TestDebuging()
         {
-//            if (taskBuildingList != null)
-//            {
-//                Debug.Log($"작업가능 건물 : (총 {taskBuildingList.Count}개)");
 
-//                for (int i = 0; i < taskBuildingList.Count; i++)
-//                {
-//                    BuildingBase station = taskBuildingList[i];
-//                    if (station != null)
-//                    {
-//                        Debug.Log($"{i}번 이름: {station.name}, 위치: {station.transform.position}");
-//                    }
-//                    else
-//                    {
-//                        Debug.Log($"[{i}번] NULL (비어있음)");
-//                    }
-//                }
-//;
-//            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         private void Update()
@@ -252,10 +252,10 @@ namespace LUP.PCR
             {
                 if (idleWorkers.Count == 0) break;
 
-                // 큐 맨 앞의 건물 확인
+
                 StructureBase target = taskQueue.Peek();
 
-                // 이미 누가 작업 중이면 큐에서 빼버림
+
                 if (target.HasWorker())
                 {
                     taskQueue.Dequeue();
@@ -268,7 +268,7 @@ namespace LUP.PCR
                     continue;
                 }
 
-                // 해당 장소로 갈 수 있는 가장 가까운 일꾼 찾기
+
                 WorkerAI bestWorker = GetBestInIdleWorkers(idleWorkers, target);
 
                 if (bestWorker != null)
@@ -296,8 +296,8 @@ namespace LUP.PCR
             for (int i = 0; i < activeWorkers.Count; i++)
             {
                 WorkerAI w = activeWorkers[i];
-                
-                // 작업자가 존재하고, 예약된 작업이 없을 때만 추가
+
+
                 if (w != null && !w.HasTask)
                 {
                     idleList.Add(w);
@@ -320,12 +320,12 @@ namespace LUP.PCR
 
             foreach (var w in candidates)
             {
-                if (w == null) continue; // 이미 idle 상태인 것만 넘겨받았으므로 HasTask 체크 불필요
+                if (w == null) continue;
 
                 ANode workerNode = aGrid.GetNodeFromWorldPosition(w.transform.position);
                 if (workerNode == null) continue;
 
-                // 맨해튼 거리 계산
+
                 int dx = Mathf.Abs(workerNode.indexX - targetNode.indexX);
                 int dy = Mathf.Abs(workerNode.indexY - targetNode.indexY);
                 float distScore = dx + dy;
@@ -337,7 +337,7 @@ namespace LUP.PCR
                 }
                 else if (Mathf.Abs(distScore - minScore) <= tolerance)
                 {
-                    // 거리가 비슷하면 ID가 낮은 순 (일관성 유지)
+
                     if (bestWorker != null && w.GetInstanceID() < bestWorker.GetInstanceID())
                     {
                         bestWorker = w;

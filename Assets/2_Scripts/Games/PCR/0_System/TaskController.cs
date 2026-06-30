@@ -56,7 +56,7 @@ namespace LUP.PCR
             cd.Dispose();
         }
 
-        public void InitTaskController(DigWallPreview digWallPreview, BuildPreview buildPreview, 
+        public void InitTaskController(DigWallPreview digWallPreview, BuildPreview buildPreview,
             TileMap tileMap, BuildingSystem buildingSystem)
         {
             this.digWallPreview = digWallPreview;
@@ -73,10 +73,10 @@ namespace LUP.PCR
         {
             if (currentState != null)
             {
-                currentState.Close(); // 상태 전환 전, 이전 작업 초기화
+                currentState.Close();
             }
             currentState = state;
-            currentState.Open();  // 상태 전환 후, 현재 작업 초기화
+            currentState.Open();
         }
 
         private void NotifyTaskChanged(TaskType type)
@@ -122,21 +122,21 @@ namespace LUP.PCR
             currSelectedBuildingType = buildingType;
         }
 
-        // @TODO: 이거 BuildSystem으로 가는게 맞는듯
+
         public void CreateBuilding()
         {
             buildingSystem.CreateBuilding(currSelectedBuildingType, lastClickTile);
         }
 
-        //public void StoreBuilding()
-        //{
-        //    buildingSystem.StoreBuilding();
-        //}
+
+
+
+
 
         public void ReturnToIdleState()
         {
             IdleTask();
-            //uiCenter.ReturnToMainScreen();
+
         }
 
         public void UpdateLastClickTile(Tile tile)

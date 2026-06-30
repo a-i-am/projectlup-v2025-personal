@@ -5,8 +5,8 @@ namespace LUP
     [System.Serializable]
     public struct QuestGoal
     {
-        public int TargetId;     
-        public int GoalAmount;   
+        public int TargetId;
+        public int GoalAmount;
     }
 
     [CreateAssetMenu(menuName = "Quest/BaseQuest", fileName = "NewBaseQuest")]
@@ -35,7 +35,7 @@ namespace LUP
                 if (Goals[i].TargetId == targetId)
                 {
                     CurrentAmounts[i] += value;
-                    Debug.Log($"[{name}] ¸ñÇ¥({targetId}) ÁøÇàµµ: {CurrentAmounts[i]} / {Goals[i].GoalAmount}");
+                    Debug.Log($"[{name}] ëª©í‘œ({targetId}) ì§„í–‰ë„: {CurrentAmounts[i]} / {Goals[i].GoalAmount}");
 
                     if (CheckAllCompleted())
                     {
@@ -57,7 +57,7 @@ namespace LUP
         protected virtual void CompleteQuest()
         {
             IsCompleted = true;
-            Debug.Log($"Äù½ºÆ® ¿Ï·á: {name}");
+            Debug.Log($"í€˜ìŠ¤íŠ¸ ì™„ë£Œ: {name}");
             QuestManager.Instance.CompleteQuest(this);
         }
     }

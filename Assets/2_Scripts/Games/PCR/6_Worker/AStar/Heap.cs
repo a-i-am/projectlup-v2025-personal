@@ -17,7 +17,7 @@ namespace LUP.PCR
         {
             items = new T[maxHeapSize];
         }
-        
+
         public void Add(T item)
         {
             item.HeapIndex = currentItemCount;

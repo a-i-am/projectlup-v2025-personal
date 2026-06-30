@@ -18,10 +18,10 @@ namespace LUP
 
         [System.NonSerialized] private Sprite _iconCache;
 
-        // ===== 확장 필드 (게임별 자유, Dictionary) =====
+
         [System.NonSerialized] private Dictionary<string, string> customFields = new Dictionary<string, string>();
 
-        // 직렬화를 위한 List
+
         [SerializeField] private List<CustomField> serializedCustomFields = new List<CustomField>();
 
         public int ItemID => itemID;
@@ -54,10 +54,10 @@ namespace LUP
             Debug.Log($"{itemName} 사용! {description}");
         }
 
-        // ===== 공통 접근자 =====
+
         public string IconPath => iconPath;
 
-        // ===== 필수 필드 Setter (로더가 사용) =====
+
         public void SetItemID(int id) => itemID = id;
         public void SetItemName(string name) => itemName = name;
         public void SetItemType(Define.ItemType type) => itemType = type;
@@ -66,7 +66,7 @@ namespace LUP
         public void SetIsUsable(bool usable) => isUsable = usable;
         public void SetDescription(string desc) => description = desc;
 
-        // ===== 확장 필드 접근 (타입 안전) =====
+
 
         public int GetInt(string fieldName, int defaultValue = 0)
         {
@@ -136,7 +136,7 @@ namespace LUP
 
             foreach (var kvp in other.customFields)
             {
-                // 기존 값이 없거나 빈 값이면 덮어쓰기
+
                 if (!customFields.ContainsKey(kvp.Key) || string.IsNullOrEmpty(customFields[kvp.Key]))
                 {
                     customFields[kvp.Key] = kvp.Value;

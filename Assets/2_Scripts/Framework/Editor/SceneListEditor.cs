@@ -13,7 +13,7 @@ public class SceneListEditor : Editor
     {
         _sceneNamesProp = serializedObject.FindProperty("sceneNames");
 
-        // sceneNames °Ê SceneAsset¿∏∑Œ ø™∫Ø»Ø (¿÷¿∏∏È)
+
         _sceneAssets.Clear();
         for (int i = 0; i < _sceneNamesProp.arraySize; i++)
         {
@@ -38,7 +38,7 @@ public class SceneListEditor : Editor
 
         EditorGUILayout.LabelField("Scene List", EditorStyles.boldLabel);
 
-        // SceneAsset ∏ÆΩ∫∆Æ ±◊∏Æ±‚
+
         int removeIndex = -1;
         for (int i = 0; i < _sceneAssets.Count; i++)
         {
@@ -56,22 +56,22 @@ public class SceneListEditor : Editor
             _sceneAssets.RemoveAt(removeIndex);
         }
 
-        if (GUILayout.Button("∏ÆΩ∫∆Æ √ﬂ∞°"))
+        if (GUILayout.Button("Î¶¨Ïä§Ìä∏ Ï∂îÍ∞Ä"))
         {
             _sceneAssets.Add(null);
         }
 
         EditorGUILayout.Space();
 
-        // ∫Ø»Ø πˆ∆∞
-        if (GUILayout.Button("¿˚øÎ«œ±‚"))
+
+        if (GUILayout.Button("Ï†ÅÏö©ÌïòÍ∏∞"))
         {
             ApplyToRuntime();
         }
 
-        // µπˆ±◊øÎ¿∏∑Œ «ˆ¿Á sceneNames ∫∏ø©¡÷±‚
+
         EditorGUILayout.Space();
-        EditorGUILayout.LabelField("æ¿ ¿Ã∏ß", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Ïî¨ Ïù¥Î¶Ñ", EditorStyles.boldLabel);
         EditorGUI.BeginDisabledGroup(true);
         EditorGUILayout.PropertyField(_sceneNamesProp, includeChildren: true);
         EditorGUI.EndDisabledGroup();
@@ -103,7 +103,7 @@ public class SceneListEditor : Editor
         EditorUtility.SetDirty(target);
         AssetDatabase.SaveAssets();
 
-        Debug.Log("SceneList: SceneAsset °Ê SceneName ∫Ø»Ø øœ∑·");
+        Debug.Log("SceneList: SceneAsset ‚Üí SceneName Î≥ÄÌôò ÏôÑÎ£å");
     }
 }
 #endif

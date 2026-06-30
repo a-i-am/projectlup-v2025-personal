@@ -31,7 +31,7 @@ namespace LUP.PCR
         {
             this.runtimeData = runtimeData;
 
-            // Constructing Building
+
             constructionInfo = runtimeData.GetConstructionInfo(buildingInfo.buildingId);
             if (constructionInfo == null)
             {
@@ -45,7 +45,7 @@ namespace LUP.PCR
                 ConstructScreen.SetActive(false);
             }
 
-            // 작업자 있는지 데이터 필요.
+
             hasWork = true;
             buildingName.Value = "Ladder";
             placeName = buildingName.Value;

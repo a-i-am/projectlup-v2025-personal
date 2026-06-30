@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Video;
@@ -10,8 +10,8 @@ namespace LUP
         [SerializeField, ReadOnly]
         private List<AssetBundle> assetbundles = new List<AssetBundle>();
 
-        //만약 게임 단위로 애셋번들을 나눌 수 있다면 딕셔너리로
-        //private Dictionary<Define.StageKind,AssetBundle> assetbundles;
+
+
 
         [SerializeField, ReadOnly]
         private AssetBundle AB_Manifest;
@@ -48,7 +48,7 @@ namespace LUP
             {
                 LoadAssetBundles();
             }
-            
+
         }
 
         public T LoadVideoClip<T>(string name) where T : Object
@@ -135,7 +135,7 @@ namespace LUP
 
             return shader;
         }
-        
+
         public List<BaseStaticDataLoader> LoadStaticData(Define.StageKind type, int stagetype)
         {
             List<BaseStaticDataLoader> dataList = new List<BaseStaticDataLoader>();
@@ -222,7 +222,7 @@ namespace LUP
                     AB_Video.Unload(true);
                     AB_Video = null;
                 }
-                
+
             }
             {
                 if (AB_Audio != null)

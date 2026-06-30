@@ -4,10 +4,10 @@ namespace LUP.PCR
 {
     public class UnderConstructionState : IBuildState
     {
-        public float totalTime;         // 총 건설 시간
-        public float progressRatio;     // 진행률 (누적 진행 시간 / 총 건설 시간)
-        public bool isCompledted;       // 완료 여부
-        public bool isStarted;          // 생산 시작 여부
+        public float totalTime;
+        public float progressRatio;
+        public bool isCompledted;
+        public bool isStarted;
 
         private BuildingBase building;
         private ConstructionInfo currentConstructionInfo;
@@ -18,7 +18,7 @@ namespace LUP.PCR
 
             this.building = building;
 
-            // 건설중 UI 활성화
+
             if (building.ConstructScreen)
             {
                 building.ConstructScreen.SetActive(true);

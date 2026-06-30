@@ -64,7 +64,7 @@ namespace LUP.PCR
                     break;
                 case BuildingType.RESTAURANT:
                     buildingObject = Instantiate(restaurantPrefab, pos, Quaternion.identity, buildingSpawnTransform);
-                    
+
                     break;
                 case BuildingType.POWERSTATION:
                     buildingObject = Instantiate(powerStationPrefab, pos, Quaternion.identity, buildingSpawnTransform);
@@ -72,11 +72,11 @@ namespace LUP.PCR
                     break;
                 case BuildingType.STONEMINE:
                     buildingObject = Instantiate(stoneMinePrefab, pos, Quaternion.identity, buildingSpawnTransform);
-                    
+
                     break;
                 case BuildingType.WORKSTATION:
                     buildingObject = Instantiate(workStationPrefab, pos, Quaternion.identity, buildingSpawnTransform);
-                    
+
                     break;
                 case BuildingType.LADDER:
                     buildingObject = Instantiate(ladderPrefab, pos, Quaternion.identity, buildingSpawnTransform);

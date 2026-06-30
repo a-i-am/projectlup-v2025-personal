@@ -16,7 +16,7 @@ namespace LUP.PCR
         {
             base.Start();
 
-            //buildingEvents.OnBuildingSelected += OpenBuildingUI;
+
             buildingEvents.OnBuildingDeselected += CloseBuildingUI;
         }
 
@@ -27,7 +27,7 @@ namespace LUP.PCR
                 return;
             }
 
-            // 추후에 가속 아이템 적용 가능하게 만들어야 한다.
+
             float deltaTime = Time.deltaTime;
             currBuildState?.Tick(deltaTime);
         }
@@ -36,7 +36,7 @@ namespace LUP.PCR
         {
             this.runtimeData = runtimeData;
 
-            // Production
+
             productionInfo = runtimeData.GetProductionInfo(buildingInfo.buildingId);
             if (productionInfo == null)
             {
@@ -45,7 +45,7 @@ namespace LUP.PCR
                 productionInfo = newProductionInfo;
             }
 
-            // Constructing Building
+
             constructionInfo = runtimeData.GetConstructionInfo(buildingInfo.buildingId);
             if (constructionInfo == null)
             {
@@ -59,7 +59,7 @@ namespace LUP.PCR
                 ConstructScreen.SetActive(false);
             }
 
-            // 작업자 있는지 데이터 필요.
+
             hasWork = false;
             buildingName.Value = "PowerStation";
             placeName = buildingName.Value;
@@ -85,7 +85,7 @@ namespace LUP.PCR
 
         public override void CompleteContruction()
         {
-            // 레벨업
+
             buildingInfo.level++;
             ProductionStage stage = LUP.StageManager.Instance.GetCurrentStage() as ProductionStage;
             currentConstructionData = stage.GetCurrentConstructionData((int)BuildingType.POWERSTATION, buildingInfo.level);
@@ -138,7 +138,7 @@ namespace LUP.PCR
             {
                 DeliverToInventory();
                 StartProduction();
-                //StopProduction();
+
             }
             else
             {

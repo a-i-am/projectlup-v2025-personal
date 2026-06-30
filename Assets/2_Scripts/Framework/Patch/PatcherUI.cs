@@ -10,11 +10,11 @@ namespace LUP
         [SerializeField] private Patcher patcher;
 
         [Header("UI Elements")]
-        [SerializeField] private GameObject downloadPanel;     
-        [SerializeField] private Image progressBar;             
+        [SerializeField] private GameObject downloadPanel;
+        [SerializeField] private Image progressBar;
 
         [Header("Settings")]
-        [SerializeField] private bool autoHideWhenComplete = true;  // 완료 시 자동으로 패널 숨기기
+        [SerializeField] private bool autoHideWhenComplete = true;
 
         private bool isDownloading = false;
         private float lastProgress = 0f;
@@ -30,13 +30,13 @@ namespace LUP
                 return;
             }
 
-            // 처음엔 패널 숨기기
+
             if (downloadPanel != null)
             {
                 downloadPanel.SetActive(false);
             }
 
-            // 패치 시작 감지를 위한 코루틴 시작
+
             StartCoroutine(MonitorPatchProgress());
         }
 
@@ -46,20 +46,20 @@ namespace LUP
 
             float currentProgress = patcher.TotalProgress;
 
-            // 진행률이 변경되면 UI 업데이트
+
             if (Mathf.Abs(currentProgress - lastProgress) > 0.001f)
             {
                 UpdateProgressUI(currentProgress);
                 lastProgress = currentProgress;
 
-                // 다운로드 시작 감지
+
                 if (currentProgress > 0f && currentProgress < 1f && !isDownloading)
                 {
                     isDownloading = true;
                     ShowDownloadPanel();
                 }
 
-                // 다운로드 완료 감지
+
                 if (currentProgress >= 1f && isDownloading)
                 {
                     isDownloading = false;
@@ -112,7 +112,7 @@ namespace LUP
                 {
                     float progress = patcher.TotalProgress;
 
-                    // 진행률이 0보다 크면 다운로드가 시작된 것
+
                     if (progress > 0f && !isDownloading)
                     {
                         isDownloading = true;

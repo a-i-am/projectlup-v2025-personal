@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -33,13 +33,13 @@ namespace LUP
 
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
             slider.onValueChanged.AddListener(SetAudioVolume);
         }
 
-        // Update is called once per frame
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.R))
@@ -71,26 +71,26 @@ namespace LUP
         public override IEnumerator OnStageStay()
         {
             yield return base.OnStageStay();
-            //일단 납두기
+
             yield return null;
         }
         public override IEnumerator OnStageExit()
         {
             yield return base.OnStageExit();
-            //구현부
+
 
 
             yield return null;
         }
         protected override void LoadResources()
         {
-            //resource = ResourceManager.Instance.Load...
-            //AB = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, Path.Combine("Resources/AssetBundles", "staticdatas")));
-            //versionsdata.assetbundlehash = AB.GetHashCode().ToString();
-            //AB = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, Path.Combine("Resources/AssetBundles", "AssetBundles")));
-            //AB = ResourceManager.Instance.GetAssetBundle(Define.AssetBundleKind.Manifest);
-            ////AB = AssetBundle.LoadFromFile(Path.Combine(Application.persistentDataPath, Path.Combine("LUP/assetbundles", "AssetBundles")));
-            //AB_Manifest = AB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+
+
+
+
+
+
+
         }
 
         protected override void GetDatas()
@@ -170,7 +170,7 @@ namespace LUP
         public void CheckVersions()
         {
             AB = ResourceManager.Instance.GetAssetBundle(Define.AssetBundleKind.Manifest);
-            //AB = AssetBundle.LoadFromFile(Path.Combine(Application.persistentDataPath, Path.Combine("LUP/assetbundles", "AssetBundles")));
+
             AB_Manifest = AB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
 
             versionsdata.Videohash = AB_Manifest.GetAssetBundleHash("videos").ToString();

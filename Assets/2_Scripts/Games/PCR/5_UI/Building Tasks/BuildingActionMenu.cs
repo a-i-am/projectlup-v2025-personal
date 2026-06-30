@@ -7,7 +7,7 @@ namespace LUP.PCR
     public class BuildingActionMenu : MonoBehaviour
     {
         [SerializeField] private Canvas contentRoot;
-        [Header("°Ç¹° µé¾î°¡±â ¹öÆ°")]
+        [Header("ê±´ë¬¼ ë“¤ì–´ê°€ê¸° ë²„íŠ¼")]
         [SerializeField] private Button floatingBtnProduct;
         [SerializeField] private Button floatingBtnUpgrade;
 
@@ -26,7 +26,7 @@ namespace LUP.PCR
             }
 
             if (floatingBtnProduct != null)
-            { 
+            {
                 floatingBtnProduct.onClick.AddListener(() => OnSelectMenu?.Invoke(FarmUIBtnType.Product));
             }
 

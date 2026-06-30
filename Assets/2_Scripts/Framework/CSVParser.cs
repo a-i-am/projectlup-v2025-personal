@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text;
 
 public static class CSVParser
@@ -18,7 +18,7 @@ public static class CSVParser
                 if (i + 1 < line.Length && line[i + 1] == '"')
                 {
                     currentField.Append('"');
-                    i++; 
+                    i++;
                 }
                 else
                 {
@@ -53,7 +53,7 @@ public static class CSVParser
 
             if (c == '"')
             {
-                // escape된 따옴표 체크
+
                 if (i + 1 < csvText.Length && csvText[i + 1] == '"')
                 {
                     currentLine.Append("\"\"");

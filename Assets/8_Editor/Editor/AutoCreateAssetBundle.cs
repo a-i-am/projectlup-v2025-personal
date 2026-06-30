@@ -10,18 +10,18 @@ public static class AutoCreateAssetBundle
         var obj = Selection.activeObject;
         if (obj == null)
         {
-            Debug.LogWarning("Æú´õ¸¦ ¼±ÅÃÇÏ¼¼¿ä.");
+            Debug.LogWarning("í´ë”ë¥¼ ì„ íƒí•˜ì„¸ìš”.");
             return;
         }
 
         string folderPath = AssetDatabase.GetAssetPath(obj);
         if (!AssetDatabase.IsValidFolder(folderPath))
         {
-            Debug.LogWarning("Æú´õ¸¸ ¼±ÅÃ °¡´ÉÇÕ´Ï´Ù.");
+            Debug.LogWarning("í´ë”ë§Œ ì„ íƒ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
             return;
         }
 
-        // Æú´õ¸í ¡æ ¹øµé¸í
+
         string bundleName = Path.GetFileName(folderPath).ToLower();
 
         string[] guids = AssetDatabase.FindAssets("", new[] { folderPath });
@@ -30,15 +30,15 @@ public static class AutoCreateAssetBundle
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
 
-            // Æú´õ ÀÚÃ¼´Â ½ºÅµ
+
             if (AssetDatabase.IsValidFolder(path))
                 continue;
-            
+
             var importer = AssetImporter.GetAtPath(path);
             if (importer == null)
                 continue;
 
-            // Scene ¶Ç´Â cs ÆÄÀÏÀÌ¸é AssetBundle Á¦°Å
+
             if (path.EndsWith(".unity") || path.EndsWith(".cs"))
             {
                 importer.assetBundleName = "";
@@ -49,6 +49,6 @@ public static class AutoCreateAssetBundle
         }
 
         AssetDatabase.RemoveUnusedAssetBundleNames();
-        Debug.Log($"AssetBundle ÁöÁ¤ ¿Ï·á: {bundleName}");
+        Debug.Log($"AssetBundle ì§€ì • ì™„ë£Œ: {bundleName}");
     }
 }

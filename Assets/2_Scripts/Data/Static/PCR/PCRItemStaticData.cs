@@ -31,7 +31,7 @@ namespace LUP
         [System.NonSerialized]
         private Dictionary<string, string> customFields = new Dictionary<string, string>();
 
-        // 직렬화를 위한 List
+
         [SerializeField]
         private List<CustomField> serializedCustomFields = new List<CustomField>();
 
@@ -82,10 +82,10 @@ namespace LUP
             return Define.ItemType.None;
         }
 
-        // ===== Unity 직렬화 콜백 =====
+
         public void OnBeforeSerialize()
         {
-            // Dictionary를 List로 변환 (직렬화 전)
+
             serializedCustomFields.Clear();
             if (customFields != null)
             {
@@ -98,7 +98,7 @@ namespace LUP
 
         public void OnAfterDeserialize()
         {
-            // List를 Dictionary로 복원 (역직렬화 후)
+
             customFields = new Dictionary<string, string>();
             if (serializedCustomFields != null)
             {

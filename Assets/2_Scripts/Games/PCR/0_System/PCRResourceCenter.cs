@@ -17,7 +17,7 @@ namespace LUP.PCR
             return resourceMap[type].ToReadOnlyReactiveProperty();
         }
 
-        // 검증 코드
+
         private void Ensure(ResourceType type)
         {
             if (resourceMap.ContainsKey(type)) return;
@@ -67,7 +67,7 @@ namespace LUP.PCR
             if (amount <= 0) return true;
 
             var item = ItemManager.Instance.GetItem(type.ToString());
-            
+
             if (item == null) return false;
 
             if (GetResourceAmount(type) < amount) return false;

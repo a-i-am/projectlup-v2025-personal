@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LUP.PCR
 {
@@ -6,7 +6,7 @@ namespace LUP.PCR
     {
         protected StructureBase targetPlace;
         private Vector2Int lastEntrancePos = new Vector2Int(-999, -999);
-        
+
         public MoveActionBase(WorkerBlackboard bb) : base(bb) { }
         protected abstract string GetBuildingKey();
 
@@ -39,7 +39,7 @@ namespace LUP.PCR
 
             if (targetPlace.workSpotAnchor != null)
             {
-                // 내 위치와 최종 작업 위치(WorkSpot) 사이의 거리 계산 (높이 무시)
+
                 Vector3 myPos = new Vector3(Mover.transform.position.x, 0, Mover.transform.position.z);
                 Vector3 goalPos = new Vector3(targetPlace.WorkSpotWorldPos.x, 0, targetPlace.WorkSpotWorldPos.z);
 
@@ -76,11 +76,11 @@ namespace LUP.PCR
                 Mover.MoveInternal();
                 return NodeState.RUNNING;
             }
-            return NodeState.SUCCESS; // 내부에 갈 곳 없으면 입구까지만 이동
+            return NodeState.SUCCESS;
 
         }
 
-        // 경로 계산 및 캐싱 함수
+
         private void UpdatePath()
         {
             lastEntrancePos = targetPlace.entrancePos;

@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using UnityEngine;
 
 public static class JsonDataHelper
@@ -6,12 +6,12 @@ public static class JsonDataHelper
     public static void SaveData<T>(T data, string fileName)
     {
         string path = GetFilePath(fileName);
-        string json = JsonUtility.ToJson(data, true); 
+        string json = JsonUtility.ToJson(data, true);
 
         try
         {
             File.WriteAllText(path, json);
-            //Debug.Log($"데이터 저장 완료: {path}");
+
         }
         catch (System.Exception e)
         {
@@ -48,14 +48,14 @@ public static class JsonDataHelper
         string basePath;
 
         #if UNITY_EDITOR
-        // 개발 중: 프로젝트 폴더
+
         basePath = Path.Combine(Application.dataPath, "./Resources/Data/SavedData");
         #else
-        // 출시 후: OS 표준 경로 추후 사용
+
         basePath = Application.persistentDataPath;
         #endif
 
-        // 폴더가 없으면 생성
+
         if (!Directory.Exists(basePath))
         {
             Directory.CreateDirectory(basePath);

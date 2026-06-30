@@ -36,7 +36,7 @@ namespace LUP.PCR
                     int nextGridX = startGridX + i;
                     int nextGridY = startGridY - j;
 
-                    // 기획에 따라 통과 가능한 건물과 아닌 건물로 나뉠수도
+
                     if (tileMap.tiles[nextGridX, nextGridY].tileInfo.tileType != TileType.NONE &&
                         tileMap.tiles[nextGridX, nextGridY].tileInfo.tileType != TileType.PATH)
                     {
@@ -50,7 +50,7 @@ namespace LUP.PCR
 
         public bool CheckResourceAvailable()
         {
-            // @TODO: 자원 구현 시 작업
+
             return true;
         }
 

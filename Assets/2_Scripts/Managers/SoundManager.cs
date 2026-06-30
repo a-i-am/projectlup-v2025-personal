@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 
@@ -7,16 +7,16 @@ namespace LUP
     public class SoundManager : Singleton<SoundManager>
     {
         [Header("Audio Source Prefabs")]
-        public AudioSource bgmSource;             // BGM 전용
-        public AudioSource sfxPrefab;             // SFX용 AudioSource 프리팹
+        public AudioSource bgmSource;
+        public AudioSource sfxPrefab;
 
         [Header("Audio Volume")]
         public float currentBGMVolume=1;
         public float currentSFXVolume=1;
 
         [Header("SFX Settings")]
-        public int maxSameSFXCount = 10;           // 같은 소리 최대 동시 재생 수
-        private Dictionary<string, List<AudioSource>> activeSFX = new(); //재생중인 효과음 목록
+        public int maxSameSFXCount = 10;
+        private Dictionary<string, List<AudioSource>> activeSFX = new();
 
         Vector3 zeroVector = Vector3.zero;
         public void PlayBGM(string bgmname, bool loop = true)
@@ -39,7 +39,7 @@ namespace LUP
         }
 
         public void PlaySFX(string sfxname, GameObject gameobject = null, bool spatial = true)
-        { 
+        {
             AudioClip clip = ResourceManager.Instance.LoadAudioSFX<AudioClip>(sfxname);
             if (clip == null)
             {
@@ -54,7 +54,7 @@ namespace LUP
             list.RemoveAll(a => a == null || !a.isPlaying);
 
             if (list.Count >= maxSameSFXCount)
-                return; // 너무 많으면 재생 안 함
+                return;
             AudioSource newSFX;
 
             if (gameobject == null)
@@ -67,12 +67,12 @@ namespace LUP
             }
             newSFX.clip = clip;
             newSFX.volume = currentSFXVolume;
-            newSFX.spatialBlend = spatial ? 1f : 0f; // 3D/2D 전환
+            newSFX.spatialBlend = spatial ? 1f : 0f;
             newSFX.Play();
 
             list.Add(newSFX);
 
-            // 자동 파괴
+
             Destroy(newSFX.gameObject, clip.length + 0.1f);
         }
 

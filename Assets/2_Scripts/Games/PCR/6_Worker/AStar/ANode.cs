@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LUP.PCR
 {
@@ -16,7 +16,7 @@ namespace LUP.PCR
 
         public int lastVisitedFrame;
         private int heapIndex;
-        
+
         public int HeapIndex
         {
             get { return heapIndex; }
@@ -47,6 +47,6 @@ namespace LUP.PCR
         {
             get { return gCost + hCost; }
         }
-        
+
     }
 }

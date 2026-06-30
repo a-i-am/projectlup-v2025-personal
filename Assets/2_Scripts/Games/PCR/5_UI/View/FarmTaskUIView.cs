@@ -30,11 +30,11 @@ namespace LUP.PCR
         [SerializeField] Text buildingNameText;
 
         [Header("업그레이드 패널 UI")]
-        [SerializeField] private Text levelChangeText;   // "Lv.5 >> Lv.6"
+        [SerializeField] private Text levelChangeText;
 
         [Header("업그레이드 효과")]
-        [SerializeField] private Text effectNameText;    // "저장 용량 증가"
-        [SerializeField] private Text effectValueText;   // "35 + 5"
+        [SerializeField] private Text effectNameText;
+        [SerializeField] private Text effectValueText;
 
         [Header("필요 자원")]
         [SerializeField] private GameObject costSlot1;
@@ -132,7 +132,7 @@ namespace LUP.PCR
             }
         }
 
-        // 늘어날 때마다 갱신
+
         public void UpdateUIStats(FarmUIData data)
         {
             buildingNameText.text = data.buildingName;
@@ -150,8 +150,8 @@ namespace LUP.PCR
 
             if (data.isConstructing)
             {
-                upgradeTab.interactable = false; // 버튼 클릭 불가
-                // 현재 업그레이드 패널이 열려있다면 강제로 생산 패널로 전환
+                upgradeTab.interactable = false;
+
                 if (upgradePanel.activeSelf) ChangeOptionBtn(FarmUIBtnType.Product);
             }
             else
@@ -163,7 +163,7 @@ namespace LUP.PCR
         }
         private void UpdateUpgradePanel(FarmUIData data)
         {
-            // 만렙 처리
+
             if (data.isMaxLevel)
             {
                 levelChangeText.text = "Max Level";
@@ -175,32 +175,32 @@ namespace LUP.PCR
                 return;
             }
 
-            // 레벨 텍스트
+
             levelChangeText.text = $"Lv.{data.level} >> Lv.{data.level + 1}";
 
-            // 효과 텍스트
+
             effectNameText.text = data.effectName;
             effectValueText.text = $"{data.currentStatValue} <color=green>+{data.nextStatAddedValue}</color>";
 
-            // 비용 슬롯 1
+
             if (data.costAmount1 > 0)
             {
                 costSlot1.SetActive(true);
                 costText1.text = data.costAmount1.ToString();
-                // costIcon1.sprite = ResourceManager.GetIcon(data.costType1); // 아이콘 연결 필요
+
             }
             else costSlot1.SetActive(false);
 
-            // 비용 슬롯 2
+
             if (data.costAmount2 > 0)
             {
                 costSlot2.SetActive(true);
                 costText2.text = data.costAmount2.ToString();
-                // costIcon2.sprite = ResourceManager.GetIcon(data.costType2); // 아이콘 연결 필요
+
             }
             else costSlot2.SetActive(false);
 
-            // 버튼 활성화 (공사중이 아니면 가능)
+
             btnUpgrade.interactable = !data.isConstructing;
         }
         public void ChangeTab(FarmUIBtnType type)

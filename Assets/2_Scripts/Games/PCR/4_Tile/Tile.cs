@@ -6,9 +6,9 @@ namespace LUP.PCR
     {
         public TileInfo tileInfo;
 
-        [SerializeField] 
+        [SerializeField]
         private GameObject[] tileVisualObjects;
-        [SerializeField] 
+        [SerializeField]
         private GameObject floorVisual;
         [SerializeField]
         private GameObject canActMark;
@@ -60,8 +60,8 @@ namespace LUP.PCR
                     }
                 }
 
-                //  2층 이상이 아닐 때(즉, 1층일 때)만 바닥 활성화
-                // (만약 1층도 바닥을 끄고 싶다면 이 if문을 지우기)
+
+
                 if (isUpperFloor == false && floorVisual != null)
                 {
                     floorVisual.SetActive(true);

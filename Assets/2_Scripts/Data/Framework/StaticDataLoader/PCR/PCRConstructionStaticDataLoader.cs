@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "PCRConstructionStaticData", menuName = "Scriptable Objects/PCRConstructionStaticData")]
 public class PCRConstructionStaticDataLoader : BaseStaticDataLoader<PCRConstructionStaticData>

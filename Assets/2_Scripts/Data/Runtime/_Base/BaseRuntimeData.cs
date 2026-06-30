@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +11,10 @@ public abstract class BaseRuntimeData
 
     public event Action OnValueChanged;
 
-    // 지연 저장 설정
+
     private static MonoBehaviour coroutineRunner;
     private Coroutine saveCoroutine;
-    private float saveDelay = 0.5f;  // 0.5초 후 저장
+    private float saveDelay = 0.5f;
 
     public static void SetCoroutineRunner(MonoBehaviour runner)
     {
@@ -56,7 +56,7 @@ public abstract class BaseRuntimeData
         {
             saveCoroutine = coroutineRunner.StartCoroutine(SaveAfterDelay());
         }
-        else // 코루틴 러너가 없으면 즉시 저장
+        else
         {
             SaveDataImmediate();
             Debug.LogWarning($"[{GetType().Name}] 코루틴 러너가 설정되지 않아 즉시 저장합니다.");
@@ -67,7 +67,7 @@ public abstract class BaseRuntimeData
     {
         yield return new WaitForSeconds(saveDelay);
         SaveDataImmediate();
-        //Debug.Log($"[{GetType().Name}] 저장 완료 (지연: {saveDelay}초)");
+
     }
 
     private void SaveDataImmediate()
@@ -75,14 +75,14 @@ public abstract class BaseRuntimeData
         JsonDataHelper.SaveData(this, filename);
     }
 
-    // List 사용시 이걸 쓰셔야 자동저장 됩니다
+
     public void AddToList<T>(List<T> list, T item)
     {
         list.Add(item);
         NotifyValueChanged();
     }
 
-    // List 사용시 이걸 쓰셔야 자동저장 됩니다
+
     public bool RemoveFromList<T>(List<T> list, T item)
     {
         bool removed = list.Remove(item);
@@ -93,7 +93,7 @@ public abstract class BaseRuntimeData
         return removed;
     }
 
-    // List 사용시 이걸 쓰셔야 자동저장 됩니다
+
     public void ClearList<T>(List<T> list)
     {
         list.Clear();

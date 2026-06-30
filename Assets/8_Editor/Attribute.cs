@@ -1,4 +1,4 @@
-﻿
+
 public enum EReadOnlyType {
     FULLY_DISABLED,
     EDITABLE_RUNTIME,
@@ -6,7 +6,7 @@ public enum EReadOnlyType {
 }
 
 public class ReadOnlyAttribute : UnityEngine.PropertyAttribute {
-        
+
     public readonly EReadOnlyType runtimeOnly;
 
     public ReadOnlyAttribute(EReadOnlyType runtimeOnly = EReadOnlyType.FULLY_DISABLED)

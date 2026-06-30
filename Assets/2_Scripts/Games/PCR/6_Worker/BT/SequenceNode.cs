@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace LUP.PCR
 {
@@ -7,7 +7,7 @@ namespace LUP.PCR
         private List<BTNode> nodes = new List<BTNode>();
         public SequenceNode(List<BTNode> nodes)
         {
-            this.nodes = nodes; 
+            this.nodes = nodes;
         }
         protected override NodeState OnUpdate()
         {

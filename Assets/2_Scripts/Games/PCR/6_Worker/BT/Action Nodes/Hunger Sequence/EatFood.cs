@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LUP.PCR
 {
@@ -24,7 +24,7 @@ namespace LUP.PCR
             if (timer < duration)
             {
                 timer += Time.deltaTime;
-                
+
                 if (WorkerComp != null)
                 {
                     WorkerComp.SetActionState(WorkerActionState.Eating);
@@ -34,7 +34,7 @@ namespace LUP.PCR
             }
             else
             {
-                // 식사 완료 처리
+
                 OwnerAI.Hunger = 0f;
 
                 if (WorkerComp != null)
@@ -50,8 +50,8 @@ namespace LUP.PCR
 
                     if (restaurant.entranceAnchor != null && WorkerComp != null)
                     {
-                        Mover.Stop(); // 이동 멈추고
-                        WorkerComp.transform.position = restaurant.entranceAnchor.position; // 순간이동!
+                        Mover.Stop();
+                        WorkerComp.transform.position = restaurant.entranceAnchor.position;
                     }
                 }
 

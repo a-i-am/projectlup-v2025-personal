@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LUP.PCR
 {
@@ -10,7 +10,7 @@ namespace LUP.PCR
         {
             BuildingBase building = GetData<BuildingBase>(BBKeys.AssignedWorkplace);
 
-            if (building != null) 
+            if (building != null)
             {
                 building.ExitWorker();
                 OwnerAI.StopWorkAndResetState();

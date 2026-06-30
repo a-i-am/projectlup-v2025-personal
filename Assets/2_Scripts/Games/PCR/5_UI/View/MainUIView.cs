@@ -8,18 +8,18 @@ namespace LUP.PCR
 {
     public class MainUIView : MonoBehaviour
     {
-        [Header("ÀÛ¾÷ ¹öÆ°")]
+        [Header("ìž‘ì—… ë²„íŠ¼")]
         [SerializeField] private Button digBtn;
         [SerializeField] private Button constructBtn;
         [SerializeField] private Button inventoryBtn;
 
-        [Header("ÀÚ¿ø Ç¥½Ã")]
+        [Header("ìžì› í‘œì‹œ")]
         [SerializeField] private Text foodText;
         [SerializeField] private Text powerText;
         [SerializeField] private Text stoneText;
         [SerializeField] private Text ironText;
 
-        [Header("ÆÐ³Î")]
+        [Header("íŒ¨ë„")]
         [SerializeField] private RectTransform upperPanel;
         [SerializeField] private RectTransform taskPanel;
 
@@ -49,13 +49,13 @@ namespace LUP.PCR
         {
             cd.Clear();
             mainVM = vm;
-            
-            // ¹öÆ° ÀÔ·Â ¡æ VM Command·Î Àü´Þ
+
+
             digBtn.onClick.AddListener(() => mainVM.ClickDig.OnNext(Unit.Default));
             constructBtn.onClick.AddListener(() => mainVM.ClickConstruct.OnNext(Unit.Default));
             inventoryBtn.onClick.AddListener(() => mainVM.ClickInventory.OnNext(Unit.Default));
 
-            // ViewModel °ª ±¸µ¶ -> UI ¹Ý¿µ
+
             vm.Food.DistinctUntilChanged().Subscribe(value => foodText.text = value.ToString()).AddTo(cd);
             vm.Power.DistinctUntilChanged().Subscribe(value => powerText.text = value.ToString()).AddTo(cd);
             vm.Stone.DistinctUntilChanged().Subscribe(value => stoneText.text = value.ToString()).AddTo(cd);

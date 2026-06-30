@@ -1,4 +1,4 @@
-﻿namespace LUP.PCR
+namespace LUP.PCR
 {
     public abstract class BTNode
     {

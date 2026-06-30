@@ -7,10 +7,10 @@ namespace LUP.PCR
 {
     public class InventoryUIView : MonoBehaviour
     {
-        [Header("¹öÆ°")]
+        [Header("ë²„íŠ¼")]
         [SerializeField] private Button backBtn;
 
-        [Header("ÀÚ¿ø °³¼ö ÅØ½ºÆ®")]
+        [Header("ìžì› ê°œìˆ˜ í…ìŠ¤íŠ¸")]
         [SerializeField] private Text stoneText;
         [SerializeField] private Text coalText;
         [SerializeField] private Text ironText;
@@ -32,7 +32,7 @@ namespace LUP.PCR
             backBtn.onClick.RemoveAllListeners();
             backBtn.onClick.AddListener(() => invenVM.ClickBack.OnNext(Unit.Default));
 
-            // °ª ¹ÙÀÎµù
+
             vm.Stone.DistinctUntilChanged().Subscribe(v => stoneText.text = v.ToString()).AddTo(cd);
             vm.Coal.DistinctUntilChanged().Subscribe(v => coalText.text = v.ToString()).AddTo(cd);
             vm.Iron.DistinctUntilChanged().Subscribe(v => ironText.text = v.ToString()).AddTo(cd);

@@ -22,7 +22,7 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
         }
         else
         {
-            // downloadHandler null 체크
+
             if (www.downloadHandler == null)
             {
                 Debug.LogError("[CSVDataSourceAdapter] DownloadHandler is null");
@@ -43,7 +43,7 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
 
     public List<T> ParseToObjects<T>(string csvData, int startRow) where T : new()
     {
-        // null 체크
+
         if (string.IsNullOrEmpty(csvData))
         {
             Debug.LogError("[CSVDataSourceAdapter] csvData is null or empty");
@@ -53,11 +53,11 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
         Debug.Log($"[CSVDataSourceAdapter] ParseToObjects called with {csvData.Length} chars");
         Debug.Log($"[CSVDataSourceAdapter] START_ROW = {startRow}");
 
-        // CSV 파서 사용 (따옴표 안의 쉼표/개행 처리)
+
         string[] lines = CSVParser.SplitLines(csvData);
         Debug.Log($"[CSVDataSourceAdapter] Split into {lines.Length} lines");
 
-        // START_ROW는 1-based, 배열은 0-based이므로 -1 필요
+
         int headerIndex = startRow - 1;
 
         if (lines.Length <= headerIndex)
@@ -66,7 +66,7 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
             return new List<T>();
         }
 
-        // START_ROW에서 헤더 읽기
+
         string[] headers = CSVParser.ParseLine(lines[headerIndex]);
         Debug.Log($"[CSVDataSourceAdapter] Headers from row {startRow} (index {headerIndex}): {string.Join(", ", headers)}");
 
@@ -81,13 +81,13 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
         int successCount = 0;
         int failCount = 0;
 
-        // START_ROW + 1부터 데이터 읽기 (헤더 다음 행부터)
+
         for (int i = headerIndex + 1; i < lines.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(lines[i]))
                 continue;
 
-            // CSV 파서 사용 (따옴표로 감싸진 필드 처리)
+
             string[] values = CSVParser.ParseLine(lines[i]);
 
             try
@@ -119,7 +119,7 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
         T instance = new T();
         FieldInfo[] fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance);
 
-        // 매핑된 컬럼 추적 (확장 필드 수집용)
+
         HashSet<string> mappedColumns = new HashSet<string>();
 
         foreach (FieldInfo field in fields)
@@ -141,7 +141,7 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
             }
 
             int columnIndex = headerMap[headerName];
-            mappedColumns.Add(headerName); // 매핑됨 추적
+            mappedColumns.Add(headerName);
 
             if (columnIndex >= values.Length)
             {
@@ -161,7 +161,7 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
             }
         }
 
-        // ===== 확장 필드 자동 수집 (ICustomFieldSupport 구현 시) =====
+
         if (instance is LUP.ICustomFieldSupport customFieldSupport)
         {
             foreach (var header in headerMap)
@@ -169,11 +169,11 @@ public class CSVDataSourceAdapter : IDataSourceAdapter
                 string columnName = header.Key;
                 int columnIndex = header.Value;
 
-                // 이미 매핑된 컬럼은 건너뛰기
+
                 if (mappedColumns.Contains(columnName))
                     continue;
 
-                // 값 가져오기
+
                 if (columnIndex < values.Length)
                 {
                     string value = values[columnIndex]?.Trim();

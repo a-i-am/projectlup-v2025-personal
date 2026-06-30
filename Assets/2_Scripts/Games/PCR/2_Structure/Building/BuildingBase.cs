@@ -72,7 +72,7 @@ namespace LUP.PCR
             this.constructionInfo = constructionInfo;
         }
 
-        // TODO: 임시 입구 설정. 입구가 왼쪽도 있어야하고 오른쪽도 있어야하는 느낌..
+
         public void SetEntrance(Vector2Int pivotPos)
         {
             entrancePos = pivotPos;
@@ -87,7 +87,7 @@ namespace LUP.PCR
             }
         }
 
-        // 건물 플로팅 아이콘
+
         protected virtual void Start()
         {
             buildingEvents.OnBuildingSelected += ToggleActionMenu;

@@ -1,4 +1,4 @@
-﻿using LUP;
+using LUP;
 using System.Collections.Generic;
 using UnityEngine;
 namespace LUP
@@ -19,7 +19,7 @@ namespace LUP
 
         public void AddQuest(BaseQuest quest)
         {
-            //퀘스트 아이디 입력받으면 추가
+
             activeQuests.Add(quest);
             quest.Initialize();
         }
@@ -45,7 +45,7 @@ namespace LUP
             BaseQuest[] quests = Resources.LoadAll<BaseQuest>("Data/Quests");
             allQuest.AddRange(quests);
 
-            
+
             List<BaseRuntimeData> runtimeDatas = LUP.DataManager.Instance.GetRuntimeData(Define.StageKind.Main, 2);
             if (runtimeDatas != null && runtimeDatas.Count > 0)
             {
@@ -100,10 +100,10 @@ namespace LUP
 
             foreach (BaseQuest quest in activeQuests)
             {
-                // 퀘스트 이름 기록
+
                 currentQuestListData.questNames.Add(quest.QuestName);
 
-                // 현재 진행 수량 저장
+
                 if (quest.CurrentAmounts != null)
                 {
                     for (int i = 0; i < quest.CurrentAmounts.Length; i++)
@@ -113,7 +113,7 @@ namespace LUP
                 }
                 else
                 {
-                    // Initialize 안된 경우 안전 처리
+
                     for (int i = 0; i < quest.Goals.Length; i++)
                     {
                         currentQuestListData.questamount.Add(0);

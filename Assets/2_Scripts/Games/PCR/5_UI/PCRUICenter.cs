@@ -38,13 +38,13 @@ namespace LUP.PCR
             constructionDecisionView.Bind(constructionDecisionVM);
             farmTaskView.Bind(farmTaskUIVM);
 
-            // 구독
+
             mainVM.ClickConstruct.Subscribe(_ =>
             {
                 controller.SetIdleActive(true);
                 screen.Value = UIScreen.SelectConstrcut;
             }).AddTo(cd);
-            mainVM.ClickDig.Subscribe(_ => 
+            mainVM.ClickDig.Subscribe(_ =>
             {
                 controller.DigWallTask();
                 screen.Value = UIScreen.DigWall;
@@ -64,7 +64,7 @@ namespace LUP.PCR
             {
                 controller.SetCurrSelectedBuildingType(buildingType);
                 controller.BuildingTask();
-                
+
                 screen.Value = UIScreen.ConstructionDecision;
             }).AddTo(cd);
 
@@ -95,7 +95,7 @@ namespace LUP.PCR
             controller.OnTaskChanged.Subscribe(HandleTaskChanged).AddTo(cd);
             controller.OnClickProductableBuilding.Subscribe(HandleProductableBuildingTask).AddTo(cd);
 
-            // 초기 화면
+
             screen.Value = UIScreen.Main;
 
             Debug.Log("UICenter Init");
@@ -103,7 +103,7 @@ namespace LUP.PCR
 
         public void TransitionScreen(UIScreen scr)
         {
-            // 초기화하는건데 애니메이션 만들 때는 없어야 할지도
+
 
             switch (scr)
             {
@@ -163,16 +163,16 @@ namespace LUP.PCR
             currentBuilding = building;
 
             farmTaskUIVM.Observe(building);
-            //TransitionScreen(UIScreen.FarmTask);
+
             screen.Value = UIScreen.FarmTask;
         }
 
-        //public void OpenRestaurantTask(BuildingRestaurant building)
-        //{
-        //    currBuilding = building;
 
-        //    // 추가 구현.            
-        //}
+
+
+
+
+
 
     }
 

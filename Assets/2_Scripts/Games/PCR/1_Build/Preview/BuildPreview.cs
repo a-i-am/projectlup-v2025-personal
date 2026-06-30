@@ -67,8 +67,8 @@ namespace LUP.PCR
 
             currPreview.SetActive(true);
             Vector3 newPos = new Vector3(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y, tile.gameObject.transform.position.z);
-            
-            
+
+
             currPreview.transform.position = tile.gameObject.transform.position;
 
             if (CanPlace(type, tile))

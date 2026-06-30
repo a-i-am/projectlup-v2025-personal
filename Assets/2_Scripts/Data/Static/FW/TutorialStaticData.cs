@@ -1,4 +1,4 @@
-﻿[System.Serializable]
+[System.Serializable]
 public class TutorialStaticData
 {
     [Column("id")] public int id;

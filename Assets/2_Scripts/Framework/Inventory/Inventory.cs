@@ -8,7 +8,7 @@ namespace LUP
     [Serializable]
     public class Inventory : BaseRuntimeData, UnityEngine.ISerializationCallbackReceiver
     {
-        // 직렬화용 필드 (JsonUtility 호환)
+
         [SerializeField]
         private List<InventorySlotData> _serializedSlots = new List<InventorySlotData>();
 
@@ -52,7 +52,7 @@ namespace LUP
                 {
                     OnItemAdded?.Invoke(item, quantity);
                     Debug.Log($"[Inventory] AddItem: {item.ItemName} x{quantity} (스택 추가)");
-                    NotifyValueChanged();  
+                    NotifyValueChanged();
                     return true;
                 }
 
@@ -61,7 +61,7 @@ namespace LUP
 
                 OnItemAdded?.Invoke(item, item.MaxStackSize - stackableSlot.Quantity);
                 Debug.Log($"[Inventory] AddItem: {item.ItemName} 일부 추가, 남은 수량: {remaining}");
-                NotifyValueChanged();  
+                NotifyValueChanged();
 
                 return AddItem(item, remaining);
             }
@@ -71,7 +71,7 @@ namespace LUP
 
             OnItemAdded?.Invoke(item, quantity);
             Debug.Log($"[Inventory] AddItem: {item.ItemName} x{quantity} (새 슬롯: {slotKey})");
-            NotifyValueChanged();  
+            NotifyValueChanged();
             return true;
         }
 
@@ -101,7 +101,7 @@ namespace LUP
                 OnItemUsed?.Invoke(slot.Item);
             }
 
-            RemoveItem(itemID, quantity); 
+            RemoveItem(itemID, quantity);
             return true;
         }
 
@@ -138,7 +138,7 @@ namespace LUP
             }
 
             OnItemRemoved?.Invoke(slot.Item, quantity);
-            NotifyValueChanged();  
+            NotifyValueChanged();
             return true;
         }
 
@@ -177,7 +177,7 @@ namespace LUP
                 slots = new Dictionary<string, InventorySlot>();
 
             slots.Clear();
-            NotifyValueChanged();  
+            NotifyValueChanged();
         }
 
         private string GenerateSlotKey(int itemID)
@@ -205,13 +205,13 @@ namespace LUP
 
         public void OnBeforeSerialize()
         {
-            //Debug.Log($"[Inventory] OnBeforeSerialize 호출 - slots.Count: {slots?.Count ?? 0}");
+
             SyncToSerializedList();
         }
 
         public void OnAfterDeserialize()
         {
-            //Debug.Log($"[Inventory] OnAfterDeserialize 호출 - _serializedSlots.Count: {_serializedSlots?.Count ?? 0}");
+
         }
 
         private void SyncToSerializedList()
@@ -234,7 +234,7 @@ namespace LUP
                 });
             }
 
-            //Debug.Log($"[Inventory] SyncToSerializedList 완료: {_serializedSlots.Count}개 슬롯");
+
         }
 
         public void InitializeFromJson()
@@ -250,7 +250,7 @@ namespace LUP
                 return;
             }
 
-            // ItemManager 초기화 체크
+
             if (ItemManager.Instance == null)
             {
                 Debug.LogError("[Inventory] ItemManager가 초기화되지 않았습니다!");
