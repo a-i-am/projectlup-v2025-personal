@@ -8,6 +8,8 @@
 
 공동 프레임워크와 제한된 리소스로 여러 장르를 제작한 13인 Unity 프로젝트입니다. 저는 SLG 팀에서 작업자를 운용해 벙커 시설을 관리하는 시스템을 개발했습니다.
 
+README 업데이트: 2026-06-30
+
 ### 프로젝트 정보
 
 | 항목 | 내용 |
@@ -57,9 +59,21 @@
 
 다수의 개발자가 같은 프레임워크를 수정할 때는 기능 구현뿐 아니라 데이터 소유권, 브랜치 동기화, 편집 도구와 런타임 코드의 경계를 명확히 해야 충돌과 회귀를 줄일 수 있었습니다.
 
+### 브랜치 및 커밋 정리
+
+- 리팩터링 커밋은 `refactor` / `refactoring` 키워드 기준으로 구분했습니다.
+- 공개용 문서는 기능 구현과 리팩터링 근거가 같은 README에서 바로 보이도록 정리했습니다.
+
+### 업데이트 계획
+
+- 필요 시 편집 도구와 성능 측정 화면을 영상 링크로 추가합니다.
+- 공개 배포 전에는 외부 에셋의 재배포 조건을 다시 확인합니다.
+
 ## English
 
 Project LUP is a 13-programmer Unity project where genre teams built games on a shared framework with limited resources. I worked on the SLG team and implemented worker AI, navigation, and editor tools for bunker management.
+
+Last updated: 2026-06-30
 
 ### Project
 
@@ -98,3 +112,13 @@ The shared framework and project assets come from the Project LUP upstream team 
 ### Lessons
 
 In a shared framework, clear data ownership, branch synchronization, and boundaries between editor tools and runtime code are as important as the feature itself.
+
+### Branch and Commit Notes
+
+- Refactoring commits are grouped by the `refactor` / `refactoring` keywords.
+- The README keeps feature scope and refactoring rationale together for easier portfolio review.
+
+### Update Plan
+
+- Add video links for the editor tooling and performance validation if needed.
+- Recheck redistribution terms for external assets before public release.
