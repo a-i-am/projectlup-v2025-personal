@@ -31,12 +31,7 @@ README 업데이트: 2026-06-30
 - 동일 Mesh와 Material의 GPU Instancing 검사 도구
 - 오클루전 컬링 설정과 렌더링 상태 검증
 
-### 구현 이유
 
-- 작업자의 배고픔, 작업 요청, 대기 상태를 매번 전체 코드에서 분기하지 않도록 행동 조건과 실행 노드를 분리했습니다.
-- 우선순위를 노드 등록 순서로 관리해 행동 추가 시 기존 전이 코드를 직접 수정하는 범위를 줄였습니다.
-- 여러 행동이 공유하는 대상과 상태는 Blackboard에 모아 노드 간 직접 참조를 줄였습니다.
-- 건물 밖의 동적 경로는 A*로 찾고, 건물 안의 연출 경로는 편집 가능한 PathPoint로 처리했습니다.
 
 ### 성능·리팩터링
 
@@ -46,8 +41,17 @@ README 업데이트: 2026-06-30
 - 맵·구조물 편집 도구를 런타임 데이터 구조와 분리했습니다.
 
 ### 기술 스택
-
-`Unity 6` `C#` `JSON` `A*` `Behaviour Tree` `GPU Instancing` `Occlusion Culling` `Git` `Fork`
+<p>
+  <img src="https://img.shields.io/badge/Unity 6-000000?style=flat-square&logo=unity&logoColor=white"/>
+  <img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=c-sharp&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JSON-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/A*-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Behaviour Tree-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/GPU Instancing-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Occlusion Culling-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Fork-000000?style=flat-square"/>
+</p>
 
 ### 에셋 및 원본
 
@@ -104,8 +108,17 @@ Behavior conditions and actions were separated so new priorities did not require
 - Kept editor tooling separate from runtime data handling
 
 ### Stack and Assets
-
-`Unity 6` `C#` `JSON` `A*` `Behaviour Tree` `GPU Instancing` `Occlusion Culling` `Git` `Fork`
+<p>
+  <img src="https://img.shields.io/badge/Unity 6-000000?style=flat-square&logo=unity&logoColor=white"/>
+  <img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=c-sharp&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JSON-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/A*-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Behaviour Tree-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/GPU Instancing-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Occlusion Culling-000000?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Fork-000000?style=flat-square"/>
+</p>
 
 The shared framework and project assets come from the Project LUP upstream team repository. Included packages and third-party assets remain subject to their original licenses; material without verified redistribution terms is excluded from the public portfolio.
 
