@@ -2,7 +2,7 @@
 
 [한국어](#한국어) | [English](#english)
 
-[A* 경로 탐색 영상](https://youtu.be/dFYgrskIBPk) | [오클루전 컬링 영상](https://youtu.be/smA8cWIU03Y)
+[A* 경로 탐색 영상](https://youtu.be/dFYgrskIBPk) | [오클루전 컬링 영상](https://youtu.be/smA8cWIU03Y) | [프로젝트 PDF](docs/projectlup.pdf)
 
 ## 한국어
 

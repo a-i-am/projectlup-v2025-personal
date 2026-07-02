@@ -15129,7 +15129,8 @@ MonoBehaviour:
   entranceAnchor: {fileID: 2351851370263844833}
   workSpotAnchor: {fileID: 4896952726223258207}
   localWaypoints:
-  - {x: 2.866149, y: -0.98350054, z: 5.3368483}
+  - {x: 6.55287, y: -0.98350054, z: -0.20628786}
+  - {x: 3.7744071, y: -0.98350054, z: 5.1082315}
   buildingStaticData:
     buildingType: 0
     power: 0

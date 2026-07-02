@@ -158,8 +158,8 @@
         },
         {
             "buildingId": 12,
-            "elapsedTime": 2.5637097358703615,
-            "currentStorage": 49
+            "elapsedTime": 2.573646306991577,
+            "currentStorage": 65
         },
         {
             "buildingId": 13,
@@ -168,6 +168,11 @@
         },
         {
             "buildingId": 14,
+            "elapsedTime": 0.0,
+            "currentStorage": 0
+        },
+        {
+            "buildingId": 35,
             "elapsedTime": 0.0,
             "currentStorage": 0
         }
@@ -211,7 +216,7 @@
         },
         {
             "buildingId": 11,
-            "elapsedTime": 12.565013885498047
+            "elapsedTime": 193.26510620117188
         },
         {
             "buildingId": 12,
@@ -224,6 +229,34 @@
         {
             "buildingId": 14,
             "elapsedTime": 6.008713245391846
+        },
+        {
+            "buildingId": 35,
+            "elapsedTime": 0.0
+        },
+        {
+            "buildingId": 36,
+            "elapsedTime": 0.0
+        },
+        {
+            "buildingId": 37,
+            "elapsedTime": 0.0
+        },
+        {
+            "buildingId": 38,
+            "elapsedTime": 0.0
+        },
+        {
+            "buildingId": 39,
+            "elapsedTime": 0.0
+        },
+        {
+            "buildingId": 40,
+            "elapsedTime": 0.0
+        },
+        {
+            "buildingId": 41,
+            "elapsedTime": 0.0
         }
     ],
     "restaurantInfo": {
